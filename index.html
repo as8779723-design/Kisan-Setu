@@ -1,0 +1,3928 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kisan Setu| किसान सेतु</title>
+    <meta name="description"
+        content="Kisan Setu is a digital agricultural companion helping farmers learn, decide, and improve with knowledge, crop guidance, weather, mandi prices, and government support." />
+    <style>
+        :root {
+            --green-900: #123b2d;
+            --green-800: #1c4f39;
+            --green-700: #2d6a48;
+            --green-600: #262827;
+            --green-500: #53a76a;
+            --green-300: #cfe9d0;
+            --green-200: #edf8ee;
+            --sage: #eaf8ef;
+            --sand: #f7f2df;
+            --yellow: #f7c956;
+            --blue: #88b9ff;
+            --blue-soft: #e9f1ff;
+            --card: #ffffff;
+            --text: #1b2b24;
+            --muted: #5d6d67;
+            --line: #dfe8e2;
+            --shadow: 0 16px 40px rgba(18, 59, 45, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(180deg, #f6faf7 0%, #edf8ee 100%);
+            color: var(--text);
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        .container {
+            width: min(1180px, calc(100% - 28px));
+            margin: 0 auto;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(18, 59, 45, 0.08);
+        }
+
+        .nav-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 74px;
+            gap: 20px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+        }
+
+        .brand-mark {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--green-600), var(--green-800));
+            display: grid;
+            place-items: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .brand-text strong {
+            font-size: 1.15rem;
+        }
+
+        .brand-text span {
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 999px;
+            transition: 0.2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--green-900);
+            background: var(--green-200);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .action-btn,
+        .primary-btn,
+        .secondary-btn,
+        .chip-btn,
+        .lesson-btn,
+        .mini-btn,
+        .floating-mic,
+        .lang-toggle {
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .action-btn:hover,
+        .primary-btn:hover,
+        .secondary-btn:hover,
+        .chip-btn:hover,
+        .lesson-btn:hover,
+        .mini-btn:hover,
+        .floating-mic:hover,
+        .lang-toggle:hover {
+            transform: translateY(-1px);
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, var(--green-600), var(--green-800));
+            color: white;
+            padding: 14px 22px;
+            border-radius: 14px;
+            font-weight: 700;
+            box-shadow: 0 10px 24px rgba(38, 103, 72, 0.25);
+        }
+
+        .secondary-btn {
+            background: white;
+            color: var(--green-900);
+            border: 1px solid rgba(18, 59, 45, 0.12);
+            padding: 14px 22px;
+            border-radius: 14px;
+            font-weight: 700;
+        }
+
+        .lang-toggle {
+            background: var(--green-200);
+            color: var(--green-900);
+            padding: 10px 14px;
+            border-radius: 999px;
+            font-weight: 700;
+        }
+
+        .hero {
+            padding: 48px 0 30px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(83, 167, 106, 0.12);
+            color: var(--green-800);
+            border: 1px solid rgba(83, 167, 106, 0.2);
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2.3rem, 4vw, 4.3rem);
+            line-height: 1.05;
+            letter-spacing: -0.05em;
+        }
+
+        .hero h1 .small {
+            display: block;
+            font-size: 0.8em;
+            color: var(--green-700);
+            margin-top: 8px;
+        }
+
+        .hero p {
+            font-size: 1.08rem;
+            line-height: 1.8;
+            color: var(--muted);
+            max-width: 620px;
+        }
+
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin: 26px 0 18px;
+        }
+
+        .hero-metrics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            padding-top: 10px;
+        }
+
+        .metric {
+            min-width: 140px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 14px 18px;
+        }
+
+        .metric strong {
+            display: block;
+            font-size: 1.5rem;
+            color: var(--green-900);
+        }
+
+        .metric span {
+            font-size: 0.82rem;
+            color: var(--muted);
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .market-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .section {
+            padding: 42px 0;
+        }
+
+        .section-heading {
+            margin-bottom: 20px;
+        }
+
+        .section-heading h2 {
+            margin: 0 0 8px;
+            font-size: clamp(1.8rem, 2.5vw, 2.8rem);
+            letter-spacing: -0.04em;
+        }
+
+        .section-heading p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .welcome-banner {
+            background: linear-gradient(135deg, #eaffef, #f3f7ff);
+            border: 1px solid rgba(72, 119, 90, 0.12);
+            border-radius: 24px;
+            padding: 22px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .welcome-banner h3 {
+            margin: 0;
+            font-size: clamp(1.3rem, 2.5vw, 2rem);
+        }
+
+        .module-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            margin-top: 22px;
+        }
+
+        .module-card,
+        .scheme-card,
+        .topic-card,
+        .future-card,
+        .market-card,
+        .weather-panel,
+        .lesson-panel,
+        .result-card,
+        .login-card {
+            background: var(--card);
+            border: 1px solid rgba(18, 59, 45, 0.08);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .module-card {
+            padding: 22px 20px;
+        }
+
+        .module-icon {
+            width: 52px;
+            height: 52px;
+            display: grid;
+            place-items: center;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #eefbef, #e6f1ff);
+            font-size: 1.7rem;
+            margin-bottom: 14px;
+        }
+
+        .module-card h4 {
+            margin: 0 0 8px;
+            font-size: 1.1rem;
+        }
+
+        .module-card p {
+            color: var(--muted);
+            margin: 0;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .personalized-box {
+            margin-top: 22px;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 18px;
+        }
+
+        .weather-brief,
+        .insight-box,
+        .lesson-overview {
+            background: linear-gradient(135deg, #f7fbf7, #eef6f4);
+            border: 1px solid rgba(18, 59, 45, 0.08);
+            border-radius: 24px;
+            padding: 22px;
+        }
+
+        .weather-brief h4,
+        .insight-box h4,
+        .lesson-overview h4 {
+            margin: 0 0 12px;
+            font-size: 1.2rem;
+        }
+
+        .weather-brief p,
+        .insight-box p,
+        .lesson-overview p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            font-size: 0.84rem;
+            color: var(--green-900);
+        }
+
+        .kisan-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 18px;
+            align-items: start;
+        }
+
+        .crop-menu {
+            background: white;
+            border: 1px solid rgba(18, 59, 45, 0.08);
+            border-radius: 24px;
+            padding: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .crop-menu h3,
+        .panel-heading h3 {
+            margin: 0 0 14px;
+            font-size: 1.2rem;
+        }
+
+        .crop-list {
+            display: grid;
+            gap: 8px;
+        }
+
+        .chip-btn {
+            text-align: left;
+            background: #f5faf6;
+            color: var(--green-900);
+            border: 1px solid transparent;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-weight: 700;
+        }
+
+        .chip-btn.active {
+            background: linear-gradient(135deg, var(--green-200), #edf5ff);
+            border-color: rgba(61, 138, 87, 0.18);
+        }
+
+        .lesson-panel {
+            padding: 20px;
+        }
+
+        .panel-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .stage-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .lesson-btn {
+            background: #f6faf7;
+            color: var(--muted);
+            border: 1px solid rgba(18, 59, 45, 0.08);
+            border-radius: 999px;
+            padding: 9px 14px;
+            font-weight: 700;
+        }
+
+        .lesson-btn.active {
+            background: var(--green-200);
+            color: var(--green-900);
+        }
+
+        .lesson-content {
+            display: grid;
+            gap: 18px;
+        }
+
+        .lesson-card {
+            display: grid;
+            grid-template-columns: 1.4fr 0.6fr;
+            gap: 18px;
+            border: 1px solid rgba(18, 59, 45, 0.08);
+            background: linear-gradient(180deg, #f9fcfa 0%, #f1f7f2 100%);
+            border-radius: 22px;
+            padding: 20px;
+        }
+
+        .lesson-illustration {
+            display: grid;
+            place-items: center;
+            font-size: 4rem;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #dff0e2, #edf6ff);
+        }
+
+        .lesson-card h4 {
+            margin: 0 0 8px;
+            font-size: 1.35rem;
+        }
+
+        .lesson-card p {
+            margin: 0 0 10px;
+            line-height: 1.8;
+            color: var(--muted);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .info-box {
+            background: white;
+            border: 1px solid rgba(18, 59, 45, 0.08);
+            border-radius: 18px;
+            padding: 16px;
+        }
+
+        .info-box h5 {
+            margin: 0 0 8px;
+            font-size: 0.9rem;
+            color: var(--green-900);
+        }
+
+        .info-box ul {
+            margin: 0;
+            padding-left: 18px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .cta-inline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(18, 59, 45, 0.08);
+            border-radius: 16px;
+            padding: 14px 16px;
+        }
+
+        .cta-inline span {
+            font-weight: 700;
+            color: var(--green-900);
+        }
+
+        .mini-btn {
+            background: var(--green-200);
+            color: var(--green-900);
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-weight: 700;
+        }
+
+        .health-layout {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 18px;
+        }
+
+        .login-card,
+        .result-card {
+            padding: 22px;
+        }
+
+        .upload-box {
+            border: 2px dashed rgba(61, 138, 87, 0.3);
+            background: linear-gradient(180deg, #f7fcf7 0%, #eef7ff 100%);
+            border-radius: 18px;
+            min-height: 192px;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            padding: 22px;
+        }
+
+        .upload-box .icon {
+            font-size: 2.2rem;
+        }
+
+        .upload-box input {
+            display: none;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .field label {
+            font-size: 0.8rem;
+            color: var(--muted);
+            font-weight: 700;
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+            border: 1px solid rgba(18, 59, 45, 0.08);
+            border-radius: 12px;
+            padding: 12px 14px;
+            background: #fbfdfc;
+        }
+
+        .result-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: #eaf7ed;
+            color: var(--green-900);
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .result-card h4 {
+            margin: 0 0 10px;
+            font-size: 1.5rem;
+        }
+
+        .result-card p {
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .result-list {
+            list-style: none;
+            padding: 0;
+            margin: 18px 0 0;
+            display: grid;
+            gap: 14px;
+        }
+
+        .result-list li {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(18, 59, 45, 0.08);
+            padding: 12px 14px;
+            border-radius: 14px;
+        }
+
+        .result-list strong {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--green-900);
+        }
+
+        .disclaimer {
+            margin-top: 16px;
+            padding: 12px 14px;
+            border-left: 4px solid var(--yellow);
+            background: #fff9e8;
+            border-radius: 12px;
+            color: #5e4f1c;
+            font-size: 0.9rem;
+        }
+
+        .weather-layout,
+        .market-layout,
+        .future-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 18px;
+        }
+
+        .weather-panel,
+        .market-card {
+            padding: 22px;
+        }
+
+        .current-weather {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .temperature {
+            font-size: clamp(2rem, 3vw, 3.1rem);
+            font-weight: 800;
+            color: var(--green-900);
+        }
+
+        .weather-icon {
+            font-size: 3rem;
+        }
+
+        .weather-stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .weather-stat {
+            background: rgba(137, 209, 154, 0.06);
+            border: 1px solid rgba(18, 59, 45, 0.06);
+            padding: 12px;
+            border-radius: 16px;
+        }
+
+        .weather-stat strong {
+            display: block;
+            font-size: 1.2rem;
+            color: var(--green-900);
+        }
+
+        .weather-stat span {
+            color: var(--muted);
+            font-size: 0.82rem;
+        }
+
+        .forecast-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .forecast-item {
+            display: grid;
+            grid-template-columns: 90px 1fr auto;
+            align-items: center;
+            gap: 12px;
+            background: #f8faf8;
+            border: 1px solid rgba(18, 59, 45, 0.08);
+            border-radius: 14px;
+            padding: 10px 12px;
+        }
+
+        .forecast-date {
+            font-weight: 700;
+            color: var(--green-900);
+        }
+
+        .forecast-icon {
+            font-size: 1.5rem;
+        }
+
+        .forecast-text {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .market-card table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 14px;
+        }
+
+        .market-card th,
+        .market-card td {
+            text-align: left;
+            padding: 12px 10px;
+            border-bottom: 1px solid rgba(18, 59, 45, 0.08);
+        }
+
+        .market-card th {
+            color: var(--green-900);
+            font-size: 0.82rem;
+            text-transform: uppercase;
+        }
+
+        .market-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .market-meta .field {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .scheme-grid,
+        .topic-grid,
+        .future-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .scheme-card,
+        .topic-card,
+        .future-card {
+            padding: 22px 20px;
+        }
+
+        .scheme-card .badge,
+        .topic-card .badge {
+            display: inline-flex;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #edf9f0;
+            color: var(--green-900);
+            font-weight: 700;
+            font-size: 0.76rem;
+            margin-bottom: 12px;
+        }
+
+        .scheme-card h4,
+        .topic-card h4,
+        .future-card h4 {
+            margin: 0 0 10px;
+            font-size: 1.15rem;
+        }
+
+        .scheme-card p,
+        .topic-card p,
+        .future-card p {
+            margin: 0 0 14px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .list-inline {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 8px;
+            color: var(--muted);
+        }
+
+        .list-inline li::before {
+            content: "• ";
+            color: var(--green-700);
+        }
+
+        .voice-box {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        .voice-panel,
+        .voice-commands {
+            background: white;
+            border: 1px solid rgba(18, 59, 45, 0.08);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            padding: 22px;
+        }
+
+        .voice-panel {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .floating-mic {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--green-600), var(--green-800));
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 18px 34px rgba(39, 107, 75, 0.25);
+        }
+
+        .voice-panel strong {
+            display: block;
+            font-size: 1.25rem;
+            margin-bottom: 4px;
+        }
+
+        .voice-panel span,
+        .voice-commands li {
+            color: var(--muted);
+        }
+
+        .voice-commands ul {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0 0;
+            display: grid;
+            gap: 10px;
+        }
+
+        .voice-commands li {
+            background: #f8faf8;
+            border: 1px solid rgba(18, 59, 45, 0.06);
+            border-radius: 12px;
+            padding: 10px 12px;
+        }
+
+        .offline-section {
+            margin-top: 20px;
+        }
+
+        .footer {
+            padding: 24px 0 90px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        .bottom-nav {
+            display: none;
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(18, 34, 30, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+            padding: 18px;
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+        .modal-card {
+            width: min(660px, 100%);
+            background: white;
+            border-radius: 26px;
+            padding: 28px;
+            box-shadow: 0 28px 56px rgba(0, 0, 0, 0.18);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+        }
+
+        .close-btn {
+            border: none;
+            background: var(--green-200);
+            color: var(--green-900);
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+
+        .modal .form-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .modal .field.full {
+            grid-column: 1 / -1;
+        }
+
+        .toast {
+            position: fixed;
+            right: 18px;
+            bottom: 96px;
+            background: rgba(18, 59, 45, 0.96);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-weight: 600;
+            box-shadow: 0 12px 30px rgba(18, 59, 45, 0.18);
+            opacity: 0;
+            transform: translateY(12px);
+            transition: all 0.2s ease;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 980px) {
+
+            .hero-grid,
+            .health-layout,
+            .weather-layout,
+            .kisan-layout,
+            .personalized-box,
+            .voice-box,
+            .market-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .module-grid,
+            .scheme-grid,
+            .topic-grid,
+            .future-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 760px) {
+            .nav-wrap {
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .module-grid,
+            .scheme-grid,
+            .topic-grid,
+            .future-grid,
+            .weather-stats,
+            .form-grid,
+            .modal .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .brand-text strong {
+                font-size: 1rem;
+            }
+
+            .lesson-card {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-banner,
+            .panel-heading,
+            .cta-inline,
+            .voice-panel {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .bottom-nav {
+                position: fixed;
+                left: 12px;
+                right: 12px;
+                bottom: 12px;
+                display: grid;
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 8px;
+                background: rgba(255, 255, 255, 0.96);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(18, 59, 45, 0.08);
+                border-radius: 18px;
+                padding: 8px;
+                box-shadow: 0 12px 30px rgba(18, 59, 45, 0.12);
+                z-index: 90;
+            }
+
+            .bottom-nav a {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 6px;
+                padding: 10px 8px;
+                border-radius: 12px;
+                color: var(--muted);
+                font-size: 0.74rem;
+                font-weight: 700;
+            }
+
+            .bottom-nav a.active {
+                background: var(--green-200);
+                color: var(--green-900);
+            }
+
+            body {
+                padding-bottom: 80px;
+            }
+
+            .footer {
+                padding-bottom: 120px;
+            }
+        }
+
+
+        /* KISAN SETU — DARK FIELD INTELLIGENCE REDESIGN */
+        :root {
+            color-scheme: dark;
+            --green-900: #071b16;
+            --green-800: #0c2a21;
+            --green-700: #124333;
+            --green-600: #19a879;
+            --green-500: #41e0a0;
+            --green-300: #a5f3ce;
+            --green-200: #17372d;
+            --sage: #0b201b;
+            --sand: #20261d;
+            --yellow: #f5c96b;
+            --blue: #91bfff;
+            --blue-soft: #152b42;
+            --card: #101e1a;
+            --text: #edf7f1;
+            --muted: #9aafa5;
+            --line: #263b33;
+            --shadow: 0 18px 50px rgba(0, 0, 0, .26);
+        }
+
+        html {
+            scroll-padding-top: 100px;
+        }
+
+        body {
+            color: var(--text);
+            background: #08110f;
+            background-image: radial-gradient(ellipse at 15% 0%, rgba(25, 168, 121, .13), transparent 35%), radial-gradient(ellipse at 92% 20%, rgba(61, 128, 96, .10), transparent 28%);
+            line-height: 1.65;
+        }
+
+        ::selection {
+            background: rgba(65, 224, 160, .28);
+            color: #fff;
+        }
+
+        .container {
+            width: min(1240px, calc(100% - 40px));
+        }
+
+        .topbar {
+            background: rgba(7, 18, 15, .86);
+            border-bottom: 1px solid rgba(125, 180, 151, .14);
+            backdrop-filter: blur(18px);
+        }
+
+        .nav-wrap {
+            min-height: 78px;
+        }
+
+        .brand {
+            gap: 11px;
+        }
+
+        .brand-mark {
+            border-radius: 15px;
+            background: linear-gradient(145deg, #42e0a0, #137653);
+            box-shadow: 0 8px 28px rgba(25, 168, 121, .22);
+        }
+
+        .brand-text strong {
+            color: #f3fff8;
+            letter-spacing: -.03em;
+        }
+
+        .brand-text span {
+            color: #91b5a4;
+        }
+
+        .nav-links {
+            gap: 5px;
+        }
+
+        .nav-links a {
+            color: #9eb3a9;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            padding: 9px 11px;
+            transition: .2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #e9fff4;
+            background: rgba(65, 224, 160, .09);
+            border-color: rgba(65, 224, 160, .16);
+        }
+
+        .action-btn,
+        .primary-btn,
+        .secondary-btn,
+        .chip-btn,
+        .lesson-btn,
+        .mini-btn,
+        .floating-mic,
+        .lang-toggle {
+            border-radius: 12px;
+            transition: transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, #35d995, #139d6b);
+            color: #041710;
+            border: 1px solid #42e0a0;
+            font-weight: 800;
+            box-shadow: 0 8px 24px rgba(25, 168, 121, .18);
+        }
+
+        .primary-btn:hover {
+            background: linear-gradient(135deg, #62edb2, #25b982);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(25, 168, 121, .24);
+        }
+
+        .secondary-btn,
+        .lang-toggle {
+            background: #13251e;
+            color: #d7eee2;
+            border: 1px solid #2b4a3c;
+        }
+
+        .secondary-btn:hover,
+        .lang-toggle:hover {
+            background: #1a3328;
+            border-color: #438b6a;
+            transform: translateY(-1px);
+        }
+
+        .hero {
+            padding: 84px 0 74px;
+            background: transparent;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 480px;
+            height: 480px;
+            border: 1px solid rgba(65, 224, 160, .08);
+            border-radius: 50%;
+            right: -180px;
+            top: -180px;
+            box-shadow: 0 0 0 42px rgba(65, 224, 160, .025), 0 0 0 90px rgba(65, 224, 160, .018);
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            gap: clamp(32px, 6vw, 80px);
+            align-items: center;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            border: 1px solid rgba(65, 224, 160, .22);
+            background: rgba(65, 224, 160, .07);
+            color: #8ef0bd;
+            border-radius: 999px;
+            padding: 8px 14px;
+            font-size: .78rem;
+            letter-spacing: .04em;
+        }
+
+        .hero h1 {
+            color: #f3fff8;
+            font-size: clamp(3.3rem, 7vw, 6rem);
+            letter-spacing: -.075em;
+            line-height: .98;
+            margin: 22px 0;
+        }
+
+        .hero h1 .small {
+            color: #58dfa0;
+            font-size: .43em;
+            letter-spacing: -.025em;
+            margin-top: 15px;
+        }
+
+        .hero p {
+            color: #a9beb4;
+            max-width: 600px;
+            font-size: 1.08rem;
+            line-height: 1.85;
+        }
+
+        .cta-row {
+            gap: 12px;
+        }
+
+        .hero-metrics {
+            gap: 12px;
+            margin-top: 34px;
+        }
+
+        .metric {
+            background: rgba(17, 34, 27, .78);
+            border: 1px solid #243d32;
+            border-radius: 15px;
+            padding: 17px 20px;
+            min-width: 112px;
+        }
+
+        .metric strong {
+            color: #73e9ae;
+            font-size: 1.55rem;
+        }
+
+        .metric span {
+            color: #8ea69a;
+        }
+
+        .hero-visual {
+            filter: saturate(.8);
+        }
+
+        .section {
+            padding: 68px 0;
+        }
+
+        .section:nth-of-type(even) {
+            background: rgba(13, 28, 22, .35);
+            border-top: 1px solid rgba(117, 160, 135, .06);
+            border-bottom: 1px solid rgba(117, 160, 135, .06);
+        }
+
+        .section-heading {
+            margin-bottom: 30px;
+            max-width: 780px;
+        }
+
+        .section-kicker {
+            display: inline-block;
+            color: #64e6a7;
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .15em;
+            margin-bottom: 8px;
+        }
+
+        .section-heading h2 {
+            color: #f1fff7;
+            font-size: clamp(1.8rem, 3.5vw, 2.65rem);
+            letter-spacing: -.045em;
+            line-height: 1.2;
+        }
+
+        .section-heading p {
+            color: #91a99d;
+            font-size: 1rem;
+        }
+
+        .welcome-banner {
+            background: linear-gradient(110deg, rgba(28, 93, 62, .44), rgba(14, 32, 25, .95));
+            border: 1px solid #2b5a43;
+            border-radius: 20px;
+            padding: 24px 26px;
+            box-shadow: var(--shadow);
+        }
+
+        .welcome-banner h3 {
+            color: #eafff2;
+        }
+
+        .module-grid,
+        .scheme-grid,
+        .topic-grid,
+        .future-grid,
+        .market-grid {
+            gap: 16px;
+        }
+
+        .module-card,
+        .scheme-card,
+        .topic-card,
+        .future-card,
+        .market-card,
+        .weather-panel,
+        .lesson-panel,
+        .result-card,
+        .login-card,
+        .crop-menu,
+        .voice-box,
+        .personalized-box,
+        .resource-card {
+            background: linear-gradient(155deg, rgba(20, 39, 31, .97), rgba(12, 25, 20, .98));
+            color: var(--text);
+            border: 1px solid #263e32;
+            border-radius: 19px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, .14);
+        }
+
+        .module-card {
+            padding: 24px;
+            min-height: 205px;
+            transition: transform .22s ease, border-color .22s ease, background .22s ease;
+            cursor: pointer;
+        }
+
+        .module-card:hover,
+        .scheme-card:hover,
+        .topic-card:hover,
+        .future-card:hover,
+        .resource-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(65, 224, 160, .45);
+            background: linear-gradient(155deg, #17372a, #10251c);
+        }
+
+        .module-icon {
+            background: rgba(65, 224, 160, .1);
+            border: 1px solid rgba(65, 224, 160, .14);
+            border-radius: 14px;
+        }
+
+        .module-card h4,
+        .scheme-card h4,
+        .topic-card h4,
+        .future-card h4,
+        .market-card h4 {
+            color: #e9fff2;
+        }
+
+        .module-card p,
+        .scheme-card p,
+        .topic-card p,
+        .future-card p,
+        .market-card p {
+            color: #9cb1a6;
+        }
+
+        .personalized-box {
+            gap: 16px;
+            padding: 18px;
+        }
+
+        .weather-brief,
+        .insight-box,
+        .lesson-overview {
+            background: #12281f;
+            border: 1px solid #284838;
+            border-radius: 15px;
+            color: #e9fff2;
+        }
+
+        .weather-brief h4,
+        .insight-box h4,
+        .lesson-overview h4 {
+            color: #dff8e9;
+        }
+
+        .weather-brief p,
+        .insight-box p {
+            color: #9cb5a7;
+        }
+
+        .tag,
+        .badge,
+        .result-badge {
+            color: #9af0bd;
+            background: rgba(65, 224, 160, .09);
+            border: 1px solid rgba(65, 224, 160, .18);
+            border-radius: 999px;
+        }
+
+        .crop-menu {
+            padding: 20px;
+        }
+
+        .crop-menu h3,
+        .lesson-panel h3,
+        .voice-commands h3 {
+            color: #eafff2;
+        }
+
+        .crop-menu button,
+        .stage-tabs button,
+        .lesson-btn,
+        .chip-btn,
+        .mini-btn {
+            color: #cce6d8;
+            background: #142b21;
+            border: 1px solid #2c4c3a;
+        }
+
+        .crop-menu button:hover,
+        .stage-tabs button:hover,
+        .lesson-btn:hover,
+        .chip-btn:hover,
+        .mini-btn:hover {
+            color: #effff6;
+            background: #1d4934;
+            border-color: #3f8e65;
+        }
+
+        .crop-menu button.active,
+        .stage-tabs button.active {
+            background: #1a5b3d;
+            color: #caffdf;
+            border-color: #3cbd7e;
+        }
+
+        .lesson-content,
+        .lesson-panel p,
+        .lesson-panel li {
+            color: #a9beb3;
+        }
+
+        .health-layout {
+            gap: 20px;
+        }
+
+        .login-card,
+        .result-card {
+            padding: 24px;
+        }
+
+        .upload-box {
+            border: 1px dashed #3e7459;
+            background: rgba(65, 224, 160, .04);
+            border-radius: 16px;
+            color: #d9f3e4;
+        }
+
+        .upload-box:hover {
+            background: rgba(65, 224, 160, .08);
+            border-color: #58c88e;
+        }
+
+        label,
+        .field label {
+            color: #b8d0c3;
+        }
+
+        input,
+        select,
+        textarea {
+            color: #e9fff2;
+            background: #0a1712;
+            border: 1px solid #2b4738;
+            border-radius: 11px;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #71877a;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: 2px solid rgba(65, 224, 160, .22);
+            border-color: #4bc68a;
+        }
+
+        option {
+            background: #102019;
+            color: #effff6;
+        }
+
+        .result-list li {
+            color: #a9beb3;
+            border-color: #263e32;
+        }
+
+        .result-list strong {
+            color: #e5fff0;
+        }
+
+        .disclaimer,
+        .resource-note {
+            color: #839b8e;
+            background: rgba(245, 201, 107, .055);
+            border: 1px solid rgba(245, 201, 107, .14);
+            border-radius: 12px;
+            padding: 12px 14px;
+        }
+
+        .weather-panel {
+            padding: 22px;
+        }
+
+        .weather-panel h3,
+        .weather-panel h4 {
+            color: #e9fff2;
+        }
+
+        .weather-panel p,
+        .weather-panel span {
+            color: #a2b8ac;
+        }
+
+        .weather-stat,
+        .forecast-card {
+            background: #13271f;
+            border: 1px solid #2a4537;
+            border-radius: 15px;
+            color: #e7fff0;
+        }
+
+        .market-card {
+            padding: 20px;
+        }
+
+        .market-card strong,
+        .price,
+        .market-price {
+            color: #72e7ac;
+        }
+
+        .scheme-card,
+        .topic-card,
+        .future-card {
+            padding: 23px;
+        }
+
+        .list-inline li {
+            color: #9eb5a8;
+        }
+
+        .voice-box {
+            padding: 22px;
+        }
+
+        .voice-panel {
+            background: linear-gradient(110deg, #143d2b, #10231b);
+            border: 1px solid #2e5c43;
+            border-radius: 18px;
+            padding: 24px;
+            color: #eafff2;
+        }
+
+        .voice-panel span {
+            color: #a5c2b1;
+        }
+
+        .voice-commands {
+            background: #0d1d16;
+            border: 1px solid #243e31;
+            border-radius: 16px;
+            color: #a9beb3;
+        }
+
+        .floating-mic {
+            background: linear-gradient(145deg, #45e5a2, #139d6b);
+            color: #061b11;
+            border: 1px solid #69edb5;
+            box-shadow: 0 10px 35px rgba(25, 168, 121, .3);
+        }
+
+        .floating-mic:hover {
+            transform: translateY(-3px) scale(1.03);
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .resource-card {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr);
+            gap: 16px;
+            padding: 22px;
+            align-items: start;
+            transition: .22s ease;
+        }
+
+        .resource-icon {
+            width: 52px;
+            height: 52px;
+            display: grid;
+            place-items: center;
+            border-radius: 15px;
+            font-size: 1.45rem;
+            background: rgba(65, 224, 160, .1);
+            border: 1px solid rgba(65, 224, 160, .18);
+        }
+
+        .resource-copy {
+            min-width: 0;
+        }
+
+        .resource-type {
+            color: #67dfa4;
+            font-size: .67rem;
+            letter-spacing: .13em;
+            font-weight: 800;
+        }
+
+        .resource-copy h3 {
+            color: #eafff2;
+            font-size: 1.12rem;
+            margin: 5px 0 7px;
+        }
+
+        .resource-copy p {
+            color: #9cb1a6;
+            margin: 0;
+            font-size: .91rem;
+        }
+
+        .resource-link {
+            grid-column: 2;
+            justify-self: start;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: #7aebb0;
+            font-weight: 750;
+            font-size: .9rem;
+            margin-top: 2px;
+        }
+
+        .resource-link:hover {
+            color: #c3ffdc;
+        }
+
+        .resource-note {
+            margin-top: 20px;
+            font-size: .85rem;
+        }
+
+        .ai-assistant-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.7fr) minmax(260px, .8fr);
+            gap: 18px;
+            align-items: stretch;
+        }
+
+        .ai-chat-card,
+        .ai-side-card {
+            min-width: 0;
+            background: linear-gradient(155deg, #12251c, #0c1913);
+            border: 1px solid #2a4737;
+            border-radius: 22px;
+            box-shadow: 0 18px 48px rgba(0, 0, 0, .18);
+            overflow: hidden;
+        }
+
+        .ai-chat-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 22px;
+            border-bottom: 1px solid #253d30;
+            background: rgba(65, 224, 160, .035);
+        }
+
+        .ai-avatar,
+        .message-avatar {
+            display: grid;
+            place-items: center;
+            flex: 0 0 auto;
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            background: linear-gradient(145deg, #40d99a, #146b4a);
+            color: #062015;
+            font-size: 1.35rem;
+            font-weight: 900;
+        }
+
+        .ai-chat-header strong {
+            display: block;
+            color: #effff6;
+        }
+
+        .ai-chat-header span {
+            display: block;
+            color: #8eaa9a;
+            font-size: .8rem;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            background: #51e5a1;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .ai-header-pill {
+            margin-left: auto;
+            padding: 6px 9px;
+            border: 1px solid #2c5740;
+            border-radius: 999px;
+            color: #80eab1 !important;
+            font-size: .65rem !important;
+            letter-spacing: .1em;
+        }
+
+        .ai-welcome {
+            padding: 24px 24px 12px;
+        }
+
+        .assistant-eyebrow {
+            color: #65dfa4;
+            font-size: .7rem;
+            font-weight: 800;
+            letter-spacing: .13em;
+        }
+
+        .ai-welcome h3 {
+            color: #edfff4;
+            font-size: 1.5rem;
+            letter-spacing: -.035em;
+            margin: 8px 0;
+        }
+
+        .ai-welcome p {
+            color: #99b1a4;
+            margin: 0;
+        }
+
+        .prompt-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 10px 24px 18px;
+        }
+
+        .prompt-chip {
+            border: 1px solid #2d4b3a;
+            border-radius: 999px;
+            background: #13291f;
+            color: #c1e1cf;
+            padding: 8px 12px;
+            font-size: .8rem;
+        }
+
+        .prompt-chip:hover {
+            border-color: #4cba80;
+            background: #1a3c2a;
+            color: #f0fff6;
+        }
+
+        .ai-response {
+            min-height: 118px;
+            max-height: 360px;
+            overflow: auto;
+            margin: 0 20px 16px;
+            padding: 16px;
+            border: 1px solid #243e30;
+            border-radius: 16px;
+            background: rgba(5, 15, 10, .42);
+        }
+
+        .assistant-message {
+            display: flex;
+            gap: 11px;
+            align-items: flex-start;
+        }
+
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .assistant-message strong {
+            display: block;
+            color: #bff7d6;
+            font-size: .82rem;
+            margin-bottom: 3px;
+        }
+
+        .assistant-message p {
+            color: #d2e5d9;
+            margin: 0;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            font-size: .94rem;
+        }
+
+        .assistant-message.user-message {
+            justify-content: flex-end;
+            margin-bottom: 14px;
+        }
+
+        .assistant-message.user-message>div {
+            background: #173a29;
+            border: 1px solid #2d6745;
+            border-radius: 14px 4px 14px 14px;
+            padding: 11px 13px;
+            max-width: 88%;
+        }
+
+        .assistant-message.user-message strong {
+            color: #80eab1;
+        }
+
+        .assistant-message.user-message .message-avatar {
+            display: none;
+        }
+
+        .ai-input-row {
+            display: flex;
+            gap: 10px;
+            padding: 0 20px;
+        }
+
+        .ai-input-row input {
+            flex: 1;
+            min-width: 0;
+            padding: 14px 15px;
+        }
+
+        .ai-send-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+        }
+
+        .ai-send-btn:disabled {
+            opacity: .6;
+            cursor: wait;
+            transform: none;
+        }
+
+        .ai-footnote {
+            color: #789285;
+            font-size: .76rem;
+            padding: 0 22px 18px;
+            margin: 10px 0 0;
+        }
+
+        .ai-side-card {
+            padding: 25px;
+        }
+
+        .side-card-icon {
+            display: grid;
+            place-items: center;
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            background: rgba(65, 224, 160, .1);
+            font-size: 1.5rem;
+        }
+
+        .ai-side-card h3 {
+            color: #edfff4;
+            margin: 18px 0 8px;
+            font-size: 1.2rem;
+        }
+
+        .ai-side-card>p {
+            color: #99b1a4;
+            font-size: .9rem;
+            margin-bottom: 22px;
+        }
+
+        .ai-profile-fact {
+            padding: 13px 0;
+            border-top: 1px solid #263f32;
+        }
+
+        .ai-profile-fact span {
+            display: block;
+            color: #6e9a80;
+            font-size: .67rem;
+            letter-spacing: .12em;
+            font-weight: 800;
+        }
+
+        .ai-profile-fact strong {
+            color: #dff7e8;
+            display: block;
+            margin-top: 3px;
+        }
+
+        #aiUpdateProfile {
+            width: 100%;
+            margin-top: 12px;
+        }
+
+        .privacy-note {
+            display: flex;
+            gap: 10px;
+            margin-top: 22px;
+            padding: 13px;
+            background: rgba(245, 201, 107, .045);
+            border: 1px solid rgba(245, 201, 107, .12);
+            border-radius: 12px;
+        }
+
+        .privacy-note p {
+            margin: 0;
+            color: #a0ad9e;
+            font-size: .77rem;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .offline-section {
+            background: rgba(13, 28, 22, .35);
+        }
+
+        .footer {
+            color: #81978b;
+            border-top: 1px solid #1f3429;
+            background: #07100d;
+            padding: 28px 0 100px;
+        }
+
+        .bottom-nav {
+            background: rgba(7, 18, 15, .94);
+            border: 1px solid #294335;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, .3);
+            backdrop-filter: blur(16px);
+        }
+
+        .bottom-nav a {
+            color: #8ea99a;
+        }
+
+        .bottom-nav a.active,
+        .bottom-nav a:hover {
+            color: #70e7ab;
+        }
+
+        .modal {
+            background: rgba(0, 0, 0, .72);
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-card {
+            background: #102019;
+            color: #eafff2;
+            border: 1px solid #31513f;
+            border-radius: 22px;
+            box-shadow: 0 30px 100px rgba(0, 0, 0, .45);
+        }
+
+        .modal-header {
+            border-color: #294436;
+        }
+
+        .modal-card h3,
+        .modal-card h4 {
+            color: #eafff2;
+        }
+
+        .close-btn {
+            color: #c4dfd0;
+            background: #183326;
+            border: 1px solid #31513f;
+        }
+
+        .toast {
+            background: #183b2a;
+            color: #eafff2;
+            border: 1px solid #3b8058;
+            box-shadow: var(--shadow);
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid #73edb1;
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 1050px) {
+            .nav-links {
+                gap: 2px;
+            }
+
+            .nav-links a {
+                padding: 8px;
+                font-size: .84rem;
+            }
+
+            .hero {
+                padding-top: 62px;
+            }
+        }
+
+        @media (max-width: 820px) {
+            .container {
+                width: min(100% - 28px, 680px);
+            }
+
+            .nav-wrap {
+                min-height: 70px;
+                flex-wrap: wrap;
+                gap: 10px;
+                padding: 10px 0;
+            }
+
+            .nav-links {
+                order: 3;
+                width: 100%;
+                overflow-x: auto;
+                padding: 3px 0 7px;
+                white-space: nowrap;
+            }
+
+            .nav-links a {
+                flex: 0 0 auto;
+            }
+
+            .hero {
+                padding: 48px 0;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                max-width: 560px;
+                width: 100%;
+                margin: 0 auto;
+            }
+
+            .section {
+                padding: 48px 0;
+            }
+
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ai-assistant-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .container {
+                width: calc(100% - 24px);
+            }
+
+            .brand-mark {
+                width: 40px;
+                height: 40px;
+            }
+
+            .nav-actions {
+                gap: 7px;
+            }
+
+            .nav-actions .primary-btn {
+                padding: 10px 12px;
+            }
+
+            .hero h1 {
+                font-size: clamp(3rem, 16vw, 4.2rem);
+            }
+
+            .hero p {
+                font-size: .98rem;
+            }
+
+            .hero-metrics {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .metric {
+                min-width: 0;
+                padding: 13px 10px;
+            }
+
+            .metric strong {
+                font-size: 1.25rem;
+            }
+
+            .metric span {
+                font-size: .75rem;
+            }
+
+            .section-heading h2 {
+                font-size: 1.85rem;
+            }
+
+            .welcome-banner {
+                align-items: flex-start;
+                gap: 14px;
+                flex-direction: column;
+            }
+
+            .module-card,
+            .scheme-card,
+            .topic-card,
+            .future-card {
+                padding: 19px;
+            }
+
+            .resource-card {
+                padding: 17px;
+                gap: 12px;
+            }
+
+            .resource-icon {
+                width: 44px;
+                height: 44px;
+            }
+
+            .resource-link {
+                margin-top: 4px;
+            }
+
+            .ai-chat-header {
+                padding: 15px;
+            }
+
+            .ai-header-pill {
+                display: none !important;
+            }
+
+            .ai-welcome {
+                padding: 20px 17px 10px;
+            }
+
+            .prompt-chips {
+                padding: 8px 17px 15px;
+            }
+
+            .ai-response {
+                margin: 0 12px 13px;
+                padding: 12px;
+            }
+
+            .ai-input-row {
+                padding: 0 12px;
+                gap: 7px;
+            }
+
+            .ai-send-btn {
+                padding: 12px;
+            }
+
+            .ai-footnote {
+                padding: 0 14px 15px;
+            }
+
+            .ai-side-card {
+                padding: 20px;
+            }
+
+            .floating-mic#floatingMic {
+                right: 14px !important;
+                bottom: 82px !important;
+            }
+
+            .footer {
+                padding-bottom: 110px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+                animation-duration: .01ms !important;
+            }
+        }
+
+
+        /* Live time + weather card (replaces the old green hero illustration) */
+        .live-card {
+            display: grid;
+            gap: 20px;
+            padding: 30px;
+            border-radius: 28px;
+            background: #151a18;
+            border: 1px solid #2b3330;
+            color: #f2f6f4;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .35);
+        }
+
+        .live-time {
+            font-size: clamp(2.4rem, 6vw, 3.8rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -.02em;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .live-date {
+            margin-top: 8px;
+            color: #9aa6a1;
+            font-weight: 600;
+        }
+
+        .live-place {
+            font-weight: 700;
+        }
+
+        .live-weather {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 18px 0;
+            border-top: 1px solid #2b3330;
+            border-bottom: 1px solid #2b3330;
+        }
+
+        .live-icon {
+            font-size: 3.4rem;
+            line-height: 1;
+        }
+
+        .live-temp {
+            font-size: 2.6rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .live-cond {
+            margin-top: 6px;
+            color: #b8c4be;
+            font-weight: 600;
+        }
+
+        .live-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .live-stats div {
+            background: #1c2220;
+            border-radius: 14px;
+            padding: 12px;
+        }
+
+        .live-stats strong {
+            display: block;
+            font-size: 1.1rem;
+        }
+
+        .live-stats span {
+            color: #9aa6a1;
+            font-size: .85rem;
+        }
+
+        .live-note {
+            color: #9aa6a1;
+            font-size: .85rem;
+        }
+
+        .live-card [hidden] {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="container nav-wrap">
+            <a href="#home" class="brand" aria-label="Kisan Setu Home">
+                <span class="brand-mark">🌾</span>
+                <span class="brand-text">
+                    <strong>Kisan Setu</strong>
+                    <span>किसान सेतु</span>
+                </span>
+            </a>
+
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="#home" class="active">Home</a>
+                <a href="#ai-assistant">AI Assistant</a>
+                <a href="#kisan-shiksha">Kisan Shiksha</a>
+                <a href="#crop-health">Crop Health</a>
+                <a href="#weather">Weather</a>
+                <a href="#market">Market</a>
+                <a href="#schemes">Schemes</a>
+                <a href="#nearby-resources">Nearby Resources</a>
+                <a href="#modern-farming">Modern Farming</a>
+                <a href="#profile">Profile</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="lang-toggle" id="langToggle" aria-label="Toggle language">हिंदी</button>
+                <button class="primary-btn" id="profileTrigger">Get Started</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="container hero-grid">
+                <div>
+                    <div class="eyebrow">🌱 ज्ञान, तकनीक और किसान के बीच एक सेतु</div>
+                    <h1>
+                        Kisan Setu
+                        <span class="small">किसान सेतु</span>
+                    </h1>
+                    <p data-i18n="heroDescription">
+                        Kisan Setu brings agricultural learning, weather guidance, market prices,
+                        crop-health support, and government schemes in one simple, trustworthy platform.
+                        It helps farmers understand what is happening in the field and take practical action.
+                    </p>
+                    <div class="cta-row">
+                        <button class="primary-btn" id="heroStart">Get Started</button>
+                        <button class="secondary-btn" id="heroShiksha">Explore Kisan Shiksha</button>
+                    </div>
+                    <div class="hero-metrics">
+                        <div class="metric">
+                            <strong>11</strong>
+                            <span>Learning stages</span>
+                        </div>
+                        <div class="metric">
+                            <strong>8+</strong>
+                            <span>Crop categories</span>
+                        </div>
+                        <div class="metric">
+                            <strong>24/7</strong>
+                            <span>Farm guidance</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual" aria-label="Live time and weather for your location">
+                    <div class="live-card">
+                        <div>
+                            <div class="live-time" id="liveTime">--:--:--</div>
+                            <div class="live-date" id="liveDate"></div>
+                        </div>
+                        <div class="live-place" id="livePlace">📍 Finding your location…</div>
+                        <div class="live-weather">
+                            <div class="live-icon" id="liveIcon">⛅</div>
+                            <div>
+                                <div class="live-temp" id="liveTemp">--°C</div>
+                                <div class="live-cond" id="liveCond">Loading weather…</div>
+                            </div>
+                        </div>
+                        <div class="live-stats">
+                            <div><strong id="liveHum">--</strong><span>Humidity</span></div>
+                            <div><strong id="liveRain">--</strong><span>Rain chance</span></div>
+                            <div><strong id="liveWind">--</strong><span>Wind</span></div>
+                        </div>
+                        <div class="live-note" id="liveNote"></div>
+                        <button class="mini-btn" id="liveRetry" hidden>Use my location</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="dashboard">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 data-i18n="dashboardTitle">Farmer Dashboard</h2>
+                    <p data-i18n="dashboardDesc">A simple overview that connects learning, crop health, weather,
+                        markets, and government support.</p>
+                </div>
+
+                <div class="welcome-banner">
+                    <h3 id="welcomeName">Welcome to Kisan Setu, Rajesh</h3>
+                    <button class="secondary-btn" id="openProfileModalBtn">Update Profile</button>
+                </div>
+
+                <div class="module-grid">
+                    <article class="module-card"
+                        onclick="document.getElementById('ai-assistant').scrollIntoView({behavior:'smooth'});">
+                        <div class="module-icon">✨</div>
+                        <h4>AI Farmer Assistant</h4>
+                        <p>Type a farming question and get practical guidance personalized to your profile.</p>
+                    </article>
+
+                    <article class="module-card"
+                        onclick="document.getElementById('kisan-shiksha').scrollIntoView({behavior:'smooth'});">
+                        <div class="module-icon">🌱</div>
+                        <h4>Kisan Shiksha</h4>
+                        <p>Learn farming step by step with crop-wise guidance and practical actions.</p>
+                    </article>
+
+                    <article class="module-card"
+                        onclick="document.getElementById('crop-health').scrollIntoView({behavior:'smooth'});">
+                        <div class="module-icon">🤖</div>
+                        <h4>AI Crop Health</h4>
+                        <p>Upload crop photos and get guidance to identify common issues and next steps.</p>
+                    </article>
+
+                    <article class="module-card"
+                        onclick="document.getElementById('weather').scrollIntoView({behavior:'smooth'});">
+                        <div class="module-icon">🌦️</div>
+                        <h4>Weather</h4>
+                        <p>Check rain, temperature, humidity, and field-friendly agricultural advice.</p>
+                    </article>
+
+                    <article class="module-card"
+                        onclick="document.getElementById('market').scrollIntoView({behavior:'smooth'});">
+                        <div class="module-icon">💰</div>
+                        <h4>Mandi / Market Prices</h4>
+                        <p>Track local crop prices and compare nearby mandi rates before sale.</p>
+                    </article>
+
+                    <article class="module-card"
+                        onclick="document.getElementById('schemes').scrollIntoView({behavior:'smooth'});">
+                        <div class="module-icon">🏛️</div>
+                        <h4>Government Schemes</h4>
+                        <p>Find relevant schemes, subsidies, and eligibility guidance for farmers.</p>
+                    </article>
+
+                    <article class="module-card"
+                        onclick="document.getElementById('modern-farming').scrollIntoView({behavior:'smooth'});">
+                        <div class="module-icon">🚜</div>
+                        <h4>Modern Farming</h4>
+                        <p>Explore drip irrigation, soil testing, smart tools, and sustainable methods.</p>
+                    </article>
+
+                    <article class="module-card" onclick="startVoiceAssistant();">
+                        <div class="module-icon">
+                            <a href="#voice-assistant" aria-label="Open voice assistant">🎙️</a>
+                        </div>
+                        <h4>Voice Assistant</h4>
+                        <p>Ask in Hindi or English about weather, irrigation, crop health, and market data.</p>
+                    </article>
+
+                    <article class="module-card"
+                        onclick="document.getElementById('nearby-resources').scrollIntoView({behavior:'smooth'});">
+                        <div class="module-icon">📍</div>
+                        <h4>Nearby Resources</h4>
+                        <p>Find nearby Krishi Vigyan Kendras, mandis, soil testing labs, and agri-input shops.</p>
+                    </article>
+
+                    <article class="module-card"
+                        onclick="document.getElementById('profile').scrollIntoView({behavior:'smooth'});">
+                        <div class="module-icon">👨‍🌾</div>
+                        <h4>Profile</h4>
+                        <p>Build your basic farmer profile to personalize recommendations and reminders.</p>
+                    </article>
+                </div>
+
+                <div class="personalized-box">
+                    <div class="weather-brief">
+                        <h4>Personalized Home</h4>
+                        <p id="personalizedSummary">
+                            Farmer: Rajesh · Location: Meerut, Uttar Pradesh · Crop: Wheat
+                        </p>
+                        <div class="tag-row">
+                            <span class="tag">🌦️ Weather</span>
+                            <span class="tag">🌾 Wheat stage</span>
+                            <span class="tag">💧 Irrigation reminder</span>
+                            <span class="tag">📚 Recommended lesson</span>
+                        </div>
+                    </div>
+
+                    <div class="insight-box">
+                        <h4>Today’s action list</h4>
+                        <p>Check field moisture before watering, review rain forecast, and inspect yellowing wheat
+                            leaves for nutrient stress.</p>
+                        <div class="tag-row">
+                            <span class="tag">🐛 Crop alert</span>
+                            <span class="tag">💰 Nearby prices</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="ai-assistant">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="section-kicker">YOUR FARMING COPILOT</span>
+                    <h2>AI Farmer Assistant</h2>
+                    <p>Ask a question in your own words. Kisan Setu sends it to your connected assistant and returns
+                        practical, profile-aware guidance.</p>
+                </div>
+                <div class="ai-assistant-layout">
+                    <div class="ai-chat-card">
+                        <div class="ai-chat-header">
+                            <div class="ai-avatar">✦</div>
+                            <div><strong>Kisan Setu AI</strong><span><i class="status-dot"></i> Farming support
+                                    assistant</span></div>
+                            <span class="ai-header-pill">AI ASSISTANT</span>
+                        </div>
+                        <div class="ai-welcome">
+                            <span class="assistant-eyebrow">NAMASTE, KISAAN 👋</span>
+                            <h3>What can I help you with today?</h3>
+                            <p>Ask about crop care, irrigation, weather planning, or farming practices.</p>
+                        </div>
+                        <div class="prompt-chips" aria-label="Suggested questions">
+                            <button type="button" class="prompt-chip"
+                                data-prompt="How should I care for wheat at its current growth stage?">🌾 Wheat
+                                care</button>
+                            <button type="button" class="prompt-chip"
+                                data-prompt="How can I decide whether my field needs irrigation?">💧 Irrigation</button>
+                            <button type="button" class="prompt-chip"
+                                data-prompt="What should I check if crop leaves are turning yellow?">🍃 Yellow
+                                leaves</button>
+                            <button type="button" class="prompt-chip"
+                                data-prompt="What weather information should I check before spraying or watering crops?">🌦️
+                                Weather planning</button>
+                        </div>
+                        <div class="ai-response" id="aiResponse" role="status" aria-live="polite">
+                            <div class="assistant-message"><span class="message-avatar">🌱</span>
+                                <div><strong>Kisan Setu</strong>
+                                    <p>Namaste! Type your question below or choose one of the suggestions to get
+                                        started.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <form class="ai-input-row" id="aiQuestionForm">
+                            <label class="sr-only" for="aiQuestion">Ask your farming question</label>
+                            <input id="aiQuestion" name="question" type="text"
+                                placeholder="Ask about your crop, soil, or farm…" autocomplete="off" required
+                                maxlength="1200" />
+                            <button class="primary-btn ai-send-btn" type="submit" id="aiSendBtn"><span>Send</span> <span
+                                    aria-hidden="true">➤</span></button>
+                        </form>
+                        <p class="ai-footnote">AI guidance can be wrong. Confirm serious crop issues with a qualified
+                            local agriculture expert.</p>
+                    </div>
+                    <aside class="ai-side-card">
+                        <span class="side-card-icon">🧑‍🌾</span>
+                        <h3>Personalized for your farm</h3>
+                        <p>Your saved profile helps the assistant understand your location and crop context.</p>
+                        <div class="ai-profile-fact"><span>FARMER</span><strong id="aiProfileName">Rajesh</strong></div>
+                        <div class="ai-profile-fact"><span>LOCATION</span><strong id="aiProfileLocation">Meerut, Uttar
+                                Pradesh</strong></div>
+                        <div class="ai-profile-fact"><span>MAIN CROP</span><strong id="aiProfileCrop">Wheat</strong>
+                        </div>
+                        <button class="secondary-btn" type="button" id="aiUpdateProfile">Update farm profile ↗</button>
+                        <div class="privacy-note"><span>🔒</span>
+                            <p>Your question is sent to the configured Kisan Setu backend for an answer.</p>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="kisan-shiksha">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Kisan Shiksha</h2>
+                    <p>Simple crop learning designed for real-on-field decisions, not textbook complexity.</p>
+                </div>
+
+                <div class="kisan-layout">
+                    <aside class="crop-menu">
+                        <h3>Crop Learning</h3>
+                        <div class="crop-list" id="cropList"></div>
+                    </aside>
+
+                    <div class="lesson-panel">
+                        <div class="panel-heading">
+                            <h3 id="cropTitle">Wheat</h3>
+                        </div>
+                        <div class="stage-tabs" id="stageTabs"></div>
+                        <div class="lesson-content" id="lessonContent"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="crop-health">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>AI Crop Health</h2>
+                    <p>Use this tool for guidance, not a guaranteed diagnosis. Always verify with a local expert when
+                        needed.</p>
+                </div>
+
+                <div class="health-layout">
+                    <div class="login-card">
+                        <div class="upload-box" onclick="document.getElementById('cropImageInput').click();">
+                            <div>
+                                <div class="icon">📷</div>
+                                <h4>Upload or take a crop image</h4>
+                                <p>Use a clear photo of leaves, stems, or the whole crop.</p>
+                            </div>
+                            <input id="cropImageInput" type="file" accept="image/*" />
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="cropType">Select crop</label>
+                                <select id="cropType">
+                                    <option>Wheat</option>
+                                    <option>Rice</option>
+                                    <option>Maize</option>
+                                    <option>Potato</option>
+                                    <option>Onion</option>
+                                    <option>Pulses</option>
+                                    <option>Vegetables</option>
+                                    <option>Other crops</option>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                                <label for="farmingStage">Farming stage</label>
+                                <select id="farmingStage">
+                                    <option>Before Sowing</option>
+                                    <option>Soil Preparation</option>
+                                    <option>Seed Selection</option>
+                                    <option>Sowing</option>
+                                    <option>Irrigation</option>
+                                    <option>Fertilizers &amp; Soil Nutrition</option>
+                                    <option>Pest &amp; Disease Management</option>
+                                    <option>Weather Management</option>
+                                    <option>Harvesting</option>
+                                    <option>Storage</option>
+                                    <option>Selling &amp; Market Knowledge</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="cta-row" style="margin-top: 20px;">
+                            <button class="primary-btn" id="analyzeCropBtn">Analyze Crop</button>
+                        </div>
+                    </div>
+
+                    <div class="result-card" id="cropResultCard">
+                        <div class="result-badge">Guided result</div>
+                        <h4>Healthy crop outlook</h4>
+                        <p>The crop appears generally stable. Continue regular monitoring, field inspection, and timely
+                            care based on weather and stage.</p>
+                        <ul class="result-list">
+                            <li>
+                                <strong>What we detected</strong>
+                                No visible stress pattern detected in the sample view.
+                            </li>
+                            <li>
+                                <strong>What it may mean</strong>
+                                Conditions are currently balanced, but irrigation and nutrient checks should still
+                                continue.
+                            </li>
+                            <li>
+                                <strong>What you can do</strong>
+                                Keep routine observations, weed control, and irrigation checks on schedule.
+                            </li>
+                        </ul>
+                        <div class="disclaimer">
+                            This is guidance for decision support only, not a confirmed (medical/agricultural)
+                            diagnosis. If stress continues, consult a local agriculture officer or seed expert.
+                        </div>
+                        <div class="cta-inline" style="margin-top: 18px;">
+                            <span>Want to learn more?</span>
+                            <button class="mini-btn" id="learnMoreCropBtn">Learn more</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="weather">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Weather</h2>
+                    <p>Field-friendly weather and agricultural interpretation for better crop decisions.</p>
+                </div>
+
+                <div class="weather-layout">
+                    <div class="weather-panel">
+                        <div class="current-weather">
+                            <div>
+                                <div class="eyebrow" style="margin-bottom: 10px;" id="wxPlace">Locating…</div>
+                                <div class="temperature" id="wxTemp">--°C</div>
+                                <div style="color: var(--muted); font-weight: 700; margin-top: 6px;" id="wxCond">Loading
+                                    weather…
+                                </div>
+                            </div>
+                            <div class="weather-icon" id="wxIcon">⛅</div>
+                        </div>
+
+                        <div class="weather-stats">
+                            <div class="weather-stat">
+                                <strong id="wxHumidity">--</strong>
+                                <span>Humidity</span>
+                            </div>
+                            <div class="weather-stat">
+                                <strong id="wxRain">--</strong>
+                                <span>Rain chance</span>
+                            </div>
+                            <div class="weather-stat">
+                                <strong id="wxWind">--</strong>
+                                <span>Wind</span>
+                            </div>
+                        </div>
+
+                        <div class="cta-inline" style="margin-top: 18px;">
+                            <span id="wxAlert">Loading forecast…</span>
+                            <button class="mini-btn" id="weatherAdviceBtn">Irrigation advice</button>
+                        </div>
+                    </div>
+
+                    <div class="weather-panel">
+                        <h3 style="margin-top: 0;">5–7 day forecast</h3>
+                        <div class="forecast-list" id="wxForecast">
+                            <p style="color: var(--muted);">Loading forecast…</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="market">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Mandi / Market Prices</h2>
+                    <p>Compare nearby rates before selling your produce and improve your decision-making.</p>
+                </div>
+
+                <div class="market-layout">
+                    <div class="market-card">
+                        <h3 style="margin-top: 0;">Search crop &amp; location</h3>
+                        <div class="market-meta">
+                            <div class="field">
+                                <label for="cropSearch">Crop</label>
+                                <input id="cropSearch" value="Wheat" type="text" />
+                            </div>
+                            <div class="field">
+                                <label for="marketLocation">Location</label>
+                                <select id="marketLocation">
+                                    <option>Meerut</option>
+                                    <option>Muzaffarnagar</option>
+                                    <option>Agra</option>
+                                    <option>Lucknow</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Crop</th>
+                                    <th>Market</th>
+                                    <th>Min</th>
+                                    <th>Max</th>
+                                    <th>Avg</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Wheat</td>
+                                    <td>Meerut Mandi</td>
+                                    <td>₹2,150</td>
+                                    <td>₹2,380</td>
+                                    <td>₹2,270</td>
+                                </tr>
+                                <tr>
+                                    <td>Wheat</td>
+                                    <td>Muzaffarnagar Mandi</td>
+                                    <td>₹2,120</td>
+                                    <td>₹2,360</td>
+                                    <td>₹2,240</td>
+                                </tr>
+                                <tr>
+                                    <td>Wheat</td>
+                                    <td>Agra Mandi</td>
+                                    <td>₹2,180</td>
+                                    <td>₹2,390</td>
+                                    <td>₹2,285</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="market-card">
+                        <h3 style="margin-top: 0;">Latest price update</h3>
+                        <p style="color: var(--muted);">Updated: 09:45 AM, 05 Oct 2026</p>
+                        <div class="weather-stats" style="margin-top: 14px;">
+                            <div class="weather-stat">
+                                <strong>₹2,270</strong>
+                                <span>Average</span>
+                            </div>
+                            <div class="weather-stat">
+                                <strong>₹2,150</strong>
+                                <span>Minimum</span>
+                            </div>
+                            <div class="weather-stat">
+                                <strong>₹2,380</strong>
+                                <span>Maximum</span>
+                            </div>
+                        </div>
+                        <div class="cta-inline" style="margin-top: 18px;">
+                            <span>Compare nearby rates</span>
+                            <button class="mini-btn" id="marketCompareBtn">Compare</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="schemes">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Government Schemes</h2>
+                    <p>Explore relevant agricultural support options and official references.</p>
+                </div>
+
+                <div class="scheme-grid">
+                    <article class="scheme-card">
+                        <div class="badge">Income support</div>
+                        <h4>PM-KISAN</h4>
+                        <p>Direct income support for eligible farmer families.</p>
+                        <ul class="list-inline">
+                            <li>Purpose: financial assistance</li>
+                            <li>Who can benefit: eligible landholding farmers</li>
+                            <li>Official source: pmkisan.gov.in</li>
+                        </ul>
+                    </article>
+
+                    <article class="scheme-card">
+                        <div class="badge">Crop insurance</div>
+                        <h4>PMFBY</h4>
+                        <p>Crop insurance protection against yield losses and climate-related risks.</p>
+                        <ul class="list-inline">
+                            <li>Purpose: risk protection</li>
+                            <li>Who can benefit: enrolled farmers</li>
+                            <li>Official source: pmfby.gov.in</li>
+                        </ul>
+                    </article>
+
+                    <article class="scheme-card">
+                        <div class="badge">Irrigation</div>
+                        <h4>PMKSY</h4>
+                        <p>Support for water use efficiency, irrigation, and water resource improvement.</p>
+                        <ul class="list-inline">
+                            <li>Purpose: irrigation support</li>
+                            <li>Who can benefit: farmers and water-user groups</li>
+                            <li>Official source: agricoop.nic.in</li>
+                        </ul>
+                    </article>
+
+                    <article class="scheme-card">
+                        <div class="badge">Soil health</div>
+                        <h4>Soil Health Card</h4>
+                        <p>Soil testing guidance to improve nutrient management and productivity.</p>
+                        <ul class="list-inline">
+                            <li>Purpose: soil testing and recommendations</li>
+                            <li>Who can benefit: registered farmers</li>
+                            <li>Official source: soilhealth.dac.gov.in</li>
+                        </ul>
+                    </article>
+
+                    <article class="scheme-card">
+                        <div class="badge">Fertilizer support</div>
+                        <h4>Subsidy support</h4>
+                        <p>Various support programs reduce input cost and improve access to equipment.</p>
+                        <ul class="list-inline">
+                            <li>Purpose: input support and modernization</li>
+                            <li>Who can benefit: state-wise eligible farmers</li>
+                            <li>Official source: state agriculture departments</li>
+                        </ul>
+                    </article>
+
+                    <article class="scheme-card">
+                        <div class="badge">Farmer support</div>
+                        <h4>Local agriculture schemes</h4>
+                        <p>State-specific schemes for seeds, machinery, training, and climate resilience.</p>
+                        <ul class="list-inline">
+                            <li>Purpose: local agricultural uplift</li>
+                            <li>Who can benefit: region-specific applicants</li>
+                            <li>Official source: district agriculture office</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="nearby-resources">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="section-kicker">LOCAL SUPPORT NETWORK</span>
+                    <h2>Nearby Agricultural Resources</h2>
+                    <p>Find local support around your saved district. Links open a map search so you can check current
+                        locations and directions.</p>
+                </div>
+                <div class="resource-grid">
+                    <article class="resource-card">
+                        <div class="resource-icon">🎓</div>
+                        <div class="resource-copy"><span class="resource-type">LEARN &amp; GET ADVICE</span>
+                            <h3>Krishi Vigyan Kendra</h3>
+                            <p>Look for local agricultural training, demonstrations, and expert guidance.</p>
+                        </div>
+                        <a class="resource-link resource-map" data-query="Krishi Vigyan Kendra"
+                            href="https://www.google.com/maps/search/?api=1&amp;query=Krishi+Vigyan+Kendra"
+                            target="_blank" rel="noopener noreferrer">Find nearby <span>↗</span></a>
+                    </article>
+                    <article class="resource-card">
+                        <div class="resource-icon">🏪</div>
+                        <div class="resource-copy"><span class="resource-type">SELL YOUR PRODUCE</span>
+                            <h3>Mandis &amp; wholesale markets</h3>
+                            <p>Compare nearby market locations before planning transport or a sale.</p>
+                        </div>
+                        <a class="resource-link resource-map" data-query="agricultural mandi"
+                            href="https://www.google.com/maps/search/?api=1&amp;query=agricultural+mandi"
+                            target="_blank" rel="noopener noreferrer">Find nearby <span>↗</span></a>
+                    </article>
+                    <article class="resource-card">
+                        <div class="resource-icon">🧪</div>
+                        <div class="resource-copy"><span class="resource-type">TEST YOUR SOIL</span>
+                            <h3>Soil testing labs</h3>
+                            <p>Locate soil testing services before making nutrient-management decisions.</p>
+                        </div>
+                        <a class="resource-link resource-map" data-query="soil testing laboratory agriculture"
+                            href="https://www.google.com/maps/search/?api=1&amp;query=soil+testing+laboratory+agriculture"
+                            target="_blank" rel="noopener noreferrer">Find nearby <span>↗</span></a>
+                    </article>
+                    <article class="resource-card">
+                        <div class="resource-icon">🌱</div>
+                        <div class="resource-copy"><span class="resource-type">FARM INPUTS</span>
+                            <h3>Seed &amp; agri-input shops</h3>
+                            <p>Search for local seed, tools, and agricultural supply stores.</p>
+                        </div>
+                        <a class="resource-link resource-map" data-query="agricultural seed fertilizer shop"
+                            href="https://www.google.com/maps/search/?api=1&amp;query=agricultural+seed+fertilizer+shop"
+                            target="_blank" rel="noopener noreferrer">Find nearby <span>↗</span></a>
+                    </article>
+                </div>
+                <p class="resource-note">Kisan Setu opens external map results; it does not verify business
+                    availability, ratings, or opening hours.</p>
+            </div>
+        </section>
+
+        <section class="section" id="modern-farming">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Modern Farming</h2>
+                    <p>Learn practical, sustainable agricultural methods that can reduce waste and improve productivity.
+                    </p>
+                </div>
+
+                <div class="topic-grid">
+                    <article class="topic-card">
+                        <div class="badge">Water saving</div>
+                        <h4>Drip irrigation</h4>
+                        <p>Efficient water use that helps crops receive water directly at root zones.</p>
+                        <ul class="list-inline">
+                            <li>Why use it: saves water</li>
+                            <li>Advantages: lower wastage</li>
+                            <li>Requirements: pipeline and filter</li>
+                        </ul>
+                    </article>
+
+                    <article class="topic-card">
+                        <div class="badge">Soil care</div>
+                        <h4>Organic farming</h4>
+                        <p>Uses compost, crop residues, and biological methods to support soil health.</p>
+                        <ul class="list-inline">
+                            <li>Why use it: lower chemical dependence</li>
+                            <li>Advantages: long-term soil health</li>
+                            <li>Requirements: composting and inputs</li>
+                        </ul>
+                    </article>
+
+                    <article class="topic-card">
+                        <div class="badge">Data-driven</div>
+                        <h4>Precision agriculture</h4>
+                        <p>Uses field data to apply water, nutrients, and treatments more accurately.</p>
+                        <ul class="list-inline">
+                            <li>Why use it: targeted care</li>
+                            <li>Advantages: efficient use of inputs</li>
+                            <li>Requirements: sensors and analysis</li>
+                        </ul>
+                    </article>
+
+                    <article class="topic-card">
+                        <div class="badge">Nutrient planning</div>
+                        <h4>Soil testing</h4>
+                        <p>Helps match fertilizer use with actual soil needs.</p>
+                        <ul class="list-inline">
+                            <li>Why use it: better nutrition</li>
+                            <li>Advantages: cost control</li>
+                            <li>Requirements: soil sample testing</li>
+                        </ul>
+                    </article>
+
+                    <article class="topic-card">
+                        <div class="badge">Protected farming</div>
+                        <h4>Protected cultivation</h4>
+                        <p>Greenhouses and tunnels help control climate and reduce crop damage.</p>
+                        <ul class="list-inline">
+                            <li>Why use it: seasonal protection</li>
+                            <li>Advantages: better yield control</li>
+                            <li>Requirements: structure and management</li>
+                        </ul>
+                    </article>
+
+                    <article class="topic-card">
+                        <div class="badge">Vertical space</div>
+                        <h4>Vertical farming</h4>
+                        <p>Growing crops in layered systems for efficient space use and controlled conditions.</p>
+                        <ul class="list-inline">
+                            <li>Why use it: smaller land footprint</li>
+                            <li>Advantages: intensive production</li>
+                            <li>Requirements: infrastructure and energy</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="voice-assistant">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Voice-first experience</h2>
+                    <p>Ask questions in Hindi, English, or future regional languages with a simple microphone interface.
+                    </p>
+                </div>
+
+                <div class="voice-box">
+                    <div class="voice-panel">
+                        <div>
+                            <strong>Need quick help?</strong>
+                            <span>Try asking: “आज मौसम कैसा है?” or “गेहूं में पानी कब देना चाहिए?”</span>
+                        </div>
+                        <button class="floating-mic" id="voiceCommandBtn" aria-label="Speak to Kisan Setu">🎙️</button>
+                    </div>
+
+                    <div class="voice-commands">
+                        <h3 style="margin: 0;">Sample farmer queries</h3>
+                        <ul>
+                            <li>आज मौसम कैसा है?</li>
+                            <li>गेहूं में पानी कब देना चाहिए?</li>
+                            <li>मेरी फसल में पत्तियां पीली हो रही हैं।</li>
+                            <li>आज गेहूं का भाव क्या है?</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section offline-section" id="profile">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Future offline-ready architecture</h2>
+                    <p>Designed for low-connectivity environments with room for caching, lightweight lessons, and later
+                        sync support.</p>
+                </div>
+
+                <div class="future-grid">
+                    <article class="future-card">
+                        <div class="badge">Offline content</div>
+                        <h4>Cached lessons</h4>
+                        <p>Educational content can be saved for later access when internet connectivity is weak or
+                            unavailable.</p>
+                    </article>
+
+                    <article class="future-card">
+                        <div class="badge">Low-data</div>
+                        <h4>Lightweight pages</h4>
+                        <p>Simple layouts and modular data structure make the app efficient even on low-speed networks.
+                        </p>
+                    </article>
+
+                    <article class="future-card">
+                        <div class="badge">Smart reminders</div>
+                        <h4>SMS &amp; alert sync</h4>
+                        <p>Future alert systems can notify farmers about irrigation, weather, and market timing.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 Kisan Setu | ज्ञान, तकनीक और किसान के बीच एक सेतु</p>
+        </div>
+    </footer>
+
+    <nav class="bottom-nav" aria-label="Mobile navigation">
+        <a href="#home" class="active">🏠<span>Home</span></a>
+        <a href="#kisan-shiksha">🌱<span>Learn</span></a>
+        <a href="#crop-health">🤖<span>Health</span></a>
+        <a href="#weather">🌦️<span>Weather</span></a>
+    </nav>
+
+    <button class="floating-mic" id="floatingMic" style="position: fixed; right: 22px; bottom: 92px; z-index: 110;"
+        aria-label="Open voice assistant">
+        🎙️</button>
+
+    <div class="modal" id="profileModal" aria-hidden="true">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Farmer profile</h3>
+                <button class="close-btn" id="closeProfileModal" aria-label="Close profile form">×</button>
+            </div>
+
+            <form id="farmerProfileForm">
+                <div class="form-grid">
+                    <div class="field full">
+                        <label for="name">Name</label>
+                        <input id="name" value="Rajesh" required />
+                    </div>
+
+                    <div class="field">
+                        <label for="state">State</label>
+                        <input id="state" value="Uttar Pradesh" required />
+                    </div>
+
+                    <div class="field">
+                        <label for="district">District</label>
+                        <input id="district" value="Meerut" required />
+                    </div>
+
+                    <div class="field">
+                        <label for="language">Preferred language</label>
+                        <select id="language">
+                            <option>Hindi</option>
+                            <option>English</option>
+                            <option>Punjabi</option>
+                            <option>Gujarati</option>
+                            <option>Marathi</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="crops">Crops grown</label>
+                        <input id="crops" value="Wheat" required />
+                    </div>
+
+                    <div class="field">
+                        <label for="farmSize">Approximate farm size</label>
+                        <input id="farmSize" value="3 acres" required />
+                    </div>
+
+                    <div class="field full">
+                        <label for="farmingType">Farming type</label>
+                        <select id="farmingType">
+                            <option>Traditional</option>
+                            <option>Mixed farming</option>
+                            <option>Organic</option>
+                            <option>Commercial / modern</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="cta-row" style="margin-top: 20px;">
+                    <button class="primary-btn" type="submit">Save profile</button>
+                    <button class="secondary-btn" type="button" id="cancelProfileModal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        const cropData = {
+            Wheat: {
+                icon: '🌾',
+                stages: [
+                    { stage: 'Before Sowing', summary: 'Before sowing, check soil moisture and choose good planting time.', explanation: 'A good start begins with proper timing, soil preparation, and seed quality. Wheat grows best when the field is ready and drainage is good.', important: ['Choose a sowing period based on local temperatures and rainfall', 'Inspect field moisture before ploughing', 'Avoid sowing in waterlogged soil'], mistakes: ['Sowing before the field is ready', 'Using low-quality seed'], actions: ['Test soil condition', 'Plan sowing based on weather'], quiz: 'Why is timing important before sowing?' },
+                    { stage: 'Soil Preparation', summary: 'Prepare the field so roots can grow easily and water drains well.', explanation: 'Soil should be loosened, weeds removed, and the seedbed levelled. This helps seedlings emerge strongly and improves water use.', important: ['Break crusts and clods', 'Remove weeds and previous crop residue', 'Improve soil structure'], mistakes: ['Leaving soil too hard', 'Planting in uneven fields'], actions: ['Use proper tillage', 'Level the field'], quiz: 'What is the benefit of a fine and level seedbed?' },
+                    { stage: 'Seed Selection', summary: 'Use healthy seed that matches your region and soil.', explanation: 'Good seed quality supports uniform growth and improves yield. Choose seeds from reliable sources and check germination before sowing.', important: ['Use certified seed', 'Check seed germination', 'Choose disease-resistant varieties'], mistakes: ['Using damaged seed', 'Blindly buying low-cost seed'], actions: ['Inspect seed quality', 'Test germination'], quiz: 'Why should farmers check seed quality before sowing?' },
+                    { stage: 'Sowing', summary: 'Keep row spacing and seed depth consistent for strong crop growth.', explanation: 'Sowing depth and spacing influence water uptake, root spread, and plant health. Consistent placement reduces competition between plants.', important: ['Maintain uniform seed depth', 'Use proper spacing', 'Cover seeds lightly'], mistakes: ['Too deep or too shallow sowing', 'Uneven seed distribution'], actions: ['Check depth', 'Keep rows uniform'], quiz: 'What happens if seeds are planted too deep?' },
+                    { stage: 'Irrigation', summary: 'Water as needed according to growth stage and field condition.', explanation: 'Wheat needs careful irrigation. Too little water causes stress while too much water can damage roots and encourage disease.', important: ['Monitor moisture regularly', 'Avoid standing water', 'Schedule irrigation based on growth stage'], mistakes: ['Over-irrigating after rainfall', 'Watering without checking field needs'], actions: ['Check soil moisture', 'Apply irrigation only when needed'], quiz: 'What is a common problem of over-irrigation?' },
+                    { stage: 'Fertilizers & Soil Nutrition', summary: 'Apply nutrients based on soil needs and crop growth stage.', explanation: 'Balanced nutrition supports growth and helps the crop resist stress. Do not overuse fertilizers without checking soil health.', important: ['Use soil test guidance', 'Apply nitrogen in split doses', 'Add nutrients carefully'], mistakes: ['Excess nitrogen', 'Ignoring soil test results'], actions: ['Use planned nutrient schedule', 'Check soil health cards'], quiz: 'Why is soil testing important before fertilizer use?' },
+                    { stage: 'Pest & Disease Management', summary: 'Watch early signs of pest attack and fungal disease.', explanation: 'Early action is often cheaper and more effective than late treatment. Keep fields clean and inspect leaves regularly.', important: ['Look for yellowing, holes, or patches', 'Use field scouting', 'Choose safe control methods'], mistakes: ['Ignoring early symptoms', 'Spraying without diagnosis'], actions: ['Inspect weekly', 'Use recommended treatments'], quiz: 'Why is early identification important for crop protection?' },
+                    { stage: 'Weather Management', summary: 'Use weather information to plan irrigation, pest protection, and harvest timing.', explanation: 'Weather influences disease pressure, moisture needs, and grain quality. Checking forecasts helps avoid mistakes.', important: ['Plan irrigation around rainfall', 'Protect from heatwaves and storms'], mistakes: ['Ignoring weather warnings', 'Taking field actions without forecast'], actions: ['Check weekly forecast', 'Adjust watering and protection'], quiz: 'How can weather information help farmers plan irrigation?' },
+                    { stage: 'Harvesting', summary: 'Harvest when grains are mature and dry enough for storage.', explanation: 'Harvest at the right time keeps grain quality high and reduces losses. Delayed harvest can lead to lodging or grain damage.', important: ['Check grain moisture', 'Use clean harvesting tools', 'Harvest before heavy rain'], mistakes: ['Harvesting too early or too late'], actions: ['Monitor grain maturity', 'Plan timely harvest'], quiz: 'Why is timely harvesting important?' },
+                    { stage: 'Storage', summary: 'Store grain in clean, dry, and protected conditions.', explanation: 'Safe storage protects quality and prevents losses from moisture or insects. Good storage begins before the grain enters the warehouse or bin.', important: ['Keep grain dry', 'Check for insect damage', 'Use clean containers'], mistakes: ['Moist storage', 'Poorly cleaned storage areas'], actions: ['Dry grain well', 'Clean storage area'], quiz: 'What is a key risk if grains are stored with moisture?' },
+                    { stage: 'Selling & Market Knowledge', summary: 'Know local mandi rates and quality requirements before sale.', explanation: 'Farmers get better value when they compare nearby markets and understand quality factors, transport, and timing.', important: ['Check nearby prices', 'Know grain quality standards', 'Plan time of sale'], mistakes: ['Selling without comparing prices', 'Ignoring quality variation'], actions: ['Compare mandi rates', 'Plan the sale day'], quiz: 'Why is comparing nearby mandi rates useful?' }
+                ]
+            },
+            Rice: {
+                icon: '🌾',
+                stages: [
+                    { stage: 'Before Sowing', summary: 'Prepare for transplanting with water, land, and seed readiness.', explanation: 'Rice requires careful field preparation and water management. Proper plans for nursery and field conditions reduce stress later.', important: ['Check water availability', 'Prepare land for transplanting', 'Set nursery timing'], mistakes: ['Late nursery preparation'], actions: ['Prepare nursery', 'Check water access'], quiz: 'Why is land preparation important before rice sowing?' },
+                    { stage: 'Soil Preparation', summary: 'Level and prepare the field to support even water depth.', explanation: 'Uniform seedbeds and leveled land help irrigation and root development. Good levelling reduces water unevenness across the field.', important: ['Level the field', 'Remove weeds and hard clods'], mistakes: ['Uneven field surface'], actions: ['Level and plough'], quiz: 'How does leveling help rice fields?' },
+                    { stage: 'Seed Selection', summary: 'Select good seed and healthy seedlings for rice growth.', explanation: 'Healthy seedlings are more resilient and produce a better stand. Good seed quality reduces gaps in the field.', important: ['Use good-quality seed', 'Check seed health'], mistakes: ['Weak or damaged seedlings'], actions: ['Choose certified seed'], quiz: 'Why are healthy seedlings important?' },
+                    { stage: 'Sowing', summary: 'Direct seeding or nursery preparation must be timed well.', explanation: 'Rice can be direct-seeded or transplanted. Timing and spacing affect crop establishment and yield potential.', important: ['Maintain spacing', 'Control water depth'], mistakes: ['Overcrowding the plants'], actions: ['Follow recommended spacing'], quiz: 'What is one benefit of proper spacing?' },
+                    { stage: 'Irrigation', summary: 'Keep water management consistent with rice growth.', explanation: 'Rice fields usually need controlled water levels. Farmer should monitor soil moisture and prevent water stress.', important: ['Maintain flooded or saturated fields during key stages', 'Avoid deep water at wrong times'], mistakes: ['Too much or too little water'], actions: ['Check water levels'], quiz: 'How can water management affect rice growth?' },
+                    { stage: 'Fertilizers & Soil Nutrition', summary: 'Apply nutrients based on field conditions and growth stage.', explanation: 'Rice has strong nutrient demands. Balanced fertilizer use supports tillering and grain formation if done at the right time.', important: ['Apply N in split doses', 'Use soil recommendations'], mistakes: ['Overuse of nitrogen'], actions: ['Follow soil health card'], quiz: 'Why are split fertilizer applications useful?' },
+                    { stage: 'Pest & Disease Management', summary: 'Manage pests early with regular observation.', explanation: 'Rice may face insects, blast, or bacterial infection. Early scouting and correct actions help protect yield.', important: ['Inspect seedlings and leaves', 'Identify pests before damage spreads'], mistakes: ['Spraying without field checks'], actions: ['Scout weekly'], quiz: 'What is the benefit of early pest detection?' },
+                    { stage: 'Weather Management', summary: 'Weather affects water needs and disease risk in rice.', explanation: 'Heavy rain, sudden heat, or storms can affect flowering and grain quality. Timely field actions help reduce damage.', important: ['Drain excess water when needed', 'Protect crop from strong winds'], mistakes: ['Ignoring forecasts'], actions: ['Check weather advisories'], quiz: 'How can strong weather affect rice fields?' },
+                    { stage: 'Harvesting', summary: 'Harvest close to grain maturity to avoid losses.', explanation: 'Rice should be harvested at the right maturity for grain quality and milling recovery.', important: ['Observe grain moisture', 'Avoid delayed harvest'], mistakes: ['Delayed harvest causing shattering'], actions: ['Harvest on schedule'], quiz: 'Why is grain maturity important for harvest?' },
+                    { stage: 'Storage', summary: 'Dry grain before storage and prevent moisture-related losses.', explanation: 'Rice grain should be clean and dry to avoid fungal growth and spoilage. Storage conditions matter as much as harvest timing.', important: ['Reduce moisture', 'Check for insect activity'], mistakes: ['Storage with excess moisture'], actions: ['Dry and clean grain'], quiz: 'Why should rice be dried before storage?' },
+                    { stage: 'Selling & Market Knowledge', summary: 'Compare prices and grain quality before sale.', explanation: 'Market timing and quality classification influence farm income. Better awareness leads to better selling decisions.', important: ['Check local mandis', 'Know grain quality'], mistakes: ['Selling without comparing prices'], actions: ['Compare nearby rates'], quiz: 'Why should farmers compare rates before selling?' }
+                ]
+            },
+            'Other crops': { icon: '🌿', stages: [] }
+        };
+
+        const crops = ['Wheat', 'Rice', 'Maize', 'Potato', 'Onion', 'Pulses', 'Vegetables', 'Other crops'];
+        const stageNames = [
+            'Before Sowing',
+            'Soil Preparation',
+            'Seed Selection',
+            'Sowing',
+            'Irrigation',
+            'Fertilizers & Soil Nutrition',
+            'Pest & Disease Management',
+            'Weather Management',
+            'Harvesting',
+            'Storage',
+            'Selling & Market Knowledge'
+        ];
+
+        const translations = {
+            en: {
+                heroDescription: 'Kisan Setu brings agricultural learning, weather guidance, market prices, crop-health support, and government schemes in one simple, trustworthy platform. It helps farmers understand what is happening in the field and take practical action.',
+                dashboardTitle: 'Farmer Dashboard',
+                dashboardDesc: 'A simple overview that connects learning, crop health, weather, markets, and government support.'
+            },
+            hi: {
+                heroDescription: 'किसान सेतु एक सरल और भरोसेमंद मंच है, जहाँ कृषि शिक्षा, मौसम सलाह, बाजार भाव, फसल स्वास्थ्य सहायता और सरकारी योजनाएँ एक साथ मिलती हैं। यह किसानों को खेत में происход things को समझने और सही कार्रवाई करने में मदद करता है।',
+                dashboardTitle: 'कृषक डैशबोर्ड',
+                dashboardDesc: 'सीखने, फसल स्वास्थ्य, मौसम, बाजार और सरकारी सहायता को एक साथ दिखाने वाला सरल अवलोकन।'
+            }
+        };
+
+        let currentLang = 'hi';
+        let currentCrop = 'Wheat';
+        let currentStage = 0;
+        let farmerProfile = {
+            name: 'Rajesh',
+            state: 'Uttar Pradesh',
+            district: 'Meerut',
+            language: 'Hindi',
+            crops: 'Wheat',
+            farmSize: '3 acres',
+            farmingType: 'Traditional'
+        };
+
+        function setToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            clearTimeout(setToast.timer);
+            setToast.timer = setTimeout(() => toast.classList.remove('show'), 2200);
+        }
+
+        function renderCropMenu() {
+            const cropList = document.getElementById('cropList');
+            cropList.innerHTML = crops.map((crop) => {
+                const activeClass = crop === currentCrop ? 'active' : '';
+                return `<button class="chip-btn ${activeClass}" data-crop="${crop}">${cropData[crop]?.icon || '🌿'} ${crop}</button>`;
+            }).join('');
+
+            cropList.querySelectorAll('.chip-btn').forEach((button) => {
+                button.addEventListener('click', () => {
+                    currentCrop = button.dataset.crop;
+                    currentStage = 0;
+                    renderCropLesson();
+                });
+            });
+        }
+
+        function renderStageTabs() {
+            const stageTabs = document.getElementById('stageTabs');
+            const availableStages = cropData[currentCrop]?.stages?.length ? cropData[currentCrop].stages.map(item => item.stage) : stageNames;
+            stageTabs.innerHTML = availableStages.map((stage, index) => {
+                const activeClass = index === currentStage ? 'active' : '';
+                return `<button class="lesson-btn ${activeClass}" data-stage-index="${index}">${stage}</button>`;
+            }).join('');
+
+            stageTabs.querySelectorAll('.lesson-btn').forEach((button) => {
+                button.addEventListener('click', () => {
+                    currentStage = Number(button.dataset.stageIndex);
+                    renderCropLesson();
+                });
+            });
+        }
+
+        function renderCropLesson() {
+            const cropConfig = cropData[currentCrop] || { icon: '🌿', stages: stageNames.map(stage => ({ stage, summary: 'Learn best practices for this crop stage.', explanation: 'This section helps farmers understand simple, practical steps for each stage of the crop cycle.', important: ['Use weather recommendations', 'Monitor field condition'], mistakes: ['Ignoring early warning signs'], actions: ['Observe your field regularly'], quiz: 'What is the main action to take in this stage?' })) };
+            const stageData = cropConfig.stages[currentStage] || {
+                stage: stageNames[currentStage] || 'General guidance',
+                summary: 'This stage needs careful observation and regular field checks.',
+                explanation: 'Farmers should focus on timely actions and safe field management to support healthy crop growth.',
+                important: ['Inspect the field often', 'Use weather advisory', 'Keep notes'],
+                mistakes: ['Skipping checks', 'Waiting too long'],
+                actions: ['Review field conditions', 'Apply recommended actions'],
+                quiz: 'What is one practical step at this stage?'
+            };
+
+            document.getElementById('cropTitle').textContent = `${cropConfig.icon} ${currentCrop}`;
+            renderStageTabs();
+
+            const lessonContent = document.getElementById('lessonContent');
+            lessonContent.innerHTML = `
+          <div class="lesson-card">
+            <div>
+              <h4>${stageData.stage}</h4>
+              <p>${stageData.summary}</p>
+              <p>${stageData.explanation}</p>
+              <div class="cta-inline">
+                <span>Want to check your crop?</span>
+                <button class="mini-btn" onclick="document.getElementById('crop-health').scrollIntoView({behavior:'smooth'});">📷 Check My Crop</button>
+              </div>
+            </div>
+            <div class="lesson-illustration">${cropConfig.icon}</div>
+          </div>
+
+          <div class="info-grid">
+            <div class="info-box">
+              <h5>Voice explanation</h5>
+              <ul>
+                <li>Listen to a simple spoken guide for this stage.</li>
+                <li>Use voice assistant to ask more questions.</li>
+              </ul>
+            </div>
+            <div class="info-box">
+              <h5>Videos</h5>
+              <ul>
+                <li>Short crop video placeholder</li>
+                <li>Field demonstration coming soon</li>
+              </ul>
+            </div>
+            <div class="info-box">
+              <h5>Important points</h5>
+              <ul>
+                ${stageData.important.map(item => `<li>${item}</li>`).join('')}
+              </ul>
+            </div>
+            <div class="info-box">
+              <h5>Common mistakes</h5>
+              <ul>
+                ${stageData.mistakes.map(item => `<li>${item}</li>`).join('')}
+              </ul>
+            </div>
+            <div class="info-box">
+              <h5>What should I do?</h5>
+              <ul>
+                ${stageData.actions.map(item => `<li>${item}</li>`).join('')}
+              </ul>
+            </div>
+            <div class="info-box">
+              <h5>Quick quiz</h5>
+              <ul>
+                <li>${stageData.quiz}</li>
+              </ul>
+            </div>
+          </div>
+        `;
+        }
+
+        function applyLanguage(language) {
+            const entries = translations[language] || translations.hi;
+            document.querySelectorAll('[data-i18n]').forEach((node) => {
+                if (entries[node.dataset.i18n]) {
+                    node.textContent = entries[node.dataset.i18n];
+                }
+            });
+
+            const toggle = document.getElementById('langToggle');
+            toggle.textContent = language === 'hi' ? 'हिंदी' : 'English';
+        }
+
+        function updateProfileSummary() {
+            const name = farmerProfile.name || 'Farmer';
+            const state = farmerProfile.state || 'India';
+            const district = farmerProfile.district || 'District';
+            const crop = farmerProfile.crops || 'Wheat';
+            document.getElementById('welcomeName').textContent = `Welcome to Kisan Setu, ${name}`;
+            document.getElementById('personalizedSummary').textContent = `Farmer: ${name} · Location: ${district}, ${state} · Crop: ${crop}`;
+        }
+
+        function openProfileModal() {
+            document.getElementById('profileModal').classList.add('open');
+        }
+
+        function closeProfileModal() {
+            document.getElementById('profileModal').classList.remove('open');
+        }
+
+        function handleProfileSubmit(event) {
+            event.preventDefault();
+            farmerProfile = {
+                name: document.getElementById('name').value || 'Farmer',
+                state: document.getElementById('state').value || 'Uttar Pradesh',
+                district: document.getElementById('district').value || 'Meerut',
+                language: document.getElementById('language').value || 'Hindi',
+                crops: document.getElementById('crops').value || 'Wheat',
+                farmSize: document.getElementById('farmSize').value || '3 acres',
+                farmingType: document.getElementById('farmingType').value || 'Traditional'
+            };
+
+            updateProfileSummary();
+            updateResourceMapLinks();
+            updateAiProfileCard();
+            closeProfileModal();
+            setToast('Farmer profile saved');
+        }
+
+        function analyzeCrop() {
+            const cropType = document.getElementById('cropType').value;
+            const stage = document.getElementById('farmingStage').value;
+            const resultOptions = [
+                {
+                    title: 'Healthy',
+                    detection: 'The crop appears generally stable and balanced.',
+                    meaning: 'Current field conditions look healthy, but monitoring should continue as the crop stage changes.',
+                    action: 'Continue regular field checks, watering, and nutrient monitoring.'
+                },
+                {
+                    title: 'Possible nutrient deficiency',
+                    detection: 'Yellowing or pale colour may suggest a nutrient imbalance.',
+                    meaning: 'This can happen under poor soil nutrition, uneven irrigation, or stress during the crop cycle.',
+                    action: 'Check soil health, compare with a soil test, and review fertilizer use.'
+                },
+                {
+                    title: 'Possible pest issue',
+                    detection: 'Leaf damage or insect presence may suggest pests or feeding damage.',
+                    meaning: 'Insect activity can reduce photosynthesis and weaken crop strength if not managed early.',
+                    action: 'Inspect the field closely and choose a safe pest control plan recommended for your crop.'
+                },
+                {
+                    title: 'Possible disease',
+                    detection: 'Spots, fungal patches, or unusual leaf symptoms may indicate disease pressure.',
+                    meaning: 'Disease spread can worsen quickly under humid or wet field conditions.',
+                    action: 'Review field moisture, remove affected parts when appropriate, and consult local experts if symptoms spread.'
+                },
+                {
+                    title: 'Requires expert attention',
+                    detection: 'The symptoms are severe or spreading across multiple plants.',
+                    meaning: 'This may need advice from an agriculture extension officer or local specialists.',
+                    action: 'Take close field photos and contact a local agriculture expert for confirmation.'
+                }
+            ];
+
+            const selected = resultOptions[Math.floor(Math.random() * resultOptions.length)];
+            const resultCard = document.getElementById('cropResultCard');
+            resultCard.innerHTML = `
+          <div class="result-badge">Guided result</div>
+          <h4>${selected.title}</h4>
+          <p>${selected.detection}</p>
+          <ul class="result-list">
+            <li>
+              <strong>What we detected</strong>
+              ${selected.detection}
+            </li>
+            <li>
+              <strong>What it may mean</strong>
+              ${selected.meaning}
+            </li>
+            <li>
+              <strong>What you can do</strong>
+              ${selected.action}
+            </li>
+          </ul>
+          <div class="disclaimer">
+            This is guidance for decision support only, not a confirmed diagnosis. If the crop condition continues or worsens, consult a local agriculture expert or extension officer.
+          </div>
+          <div class="cta-inline" style="margin-top: 18px;">
+            <span>Learn more about ${cropType} • ${stage}</span>
+            <button class="mini-btn" id="learnMoreCropBtn">Learn more</button>
+          </div>
+        `;
+
+            document.getElementById('learnMoreCropBtn').addEventListener('click', () => {
+                currentCrop = cropType;
+                currentStage = stageNames.indexOf(stage) >= 0 ? stageNames.indexOf(stage) : 0;
+                renderCropMenu();
+                renderCropLesson();
+                document.getElementById('kisan-shiksha').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            setToast(`${cropType} review complete`);
+        }
+
+
+
+        let voiceRecognitionActive = false;
+
+        function startVoiceAssistant() {
+            const SpeechRecognition =
+                window.SpeechRecognition || window.webkitSpeechRecognition;
+
+            if (!SpeechRecognition) {
+                setToast("Voice recognition is not supported in this browser. Try Chrome or Edge.");
+                return;
+            }
+
+            if (voiceRecognitionActive) {
+                setToast("Already listening. Please speak now.");
+                return;
+            }
+
+            const recognition = new SpeechRecognition();
+            const languageCodes = {
+                en: "en-IN",
+                hi: "hi-IN",
+                mr: "mr-IN",
+                ta: "ta-IN"
+            };
+
+            recognition.lang = languageCodes[currentLang] || "hi-IN";
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.onstart = () => {
+                voiceRecognitionActive = true;
+                setToast("Listening... Please speak.");
+            };
+
+            recognition.onresult = async (event) => {
+                const transcript = event.results?.[0]?.[0]?.transcript?.trim();
+                if (!transcript) {
+                    setToast("I couldn't understand that. Please try again.");
+                    return;
+                }
+
+                setToast("You said: " + transcript);
+
+                try {
+                    const response = await fetch("/api/voice", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            text: transcript,
+                            language: currentLang,
+                            farmer: farmerProfile
+                        })
+                    });
+
+                    const data = await response.json().catch(() => ({}));
+                    if (!response.ok) {
+                        throw new Error(data.detail || data.error || "The assistant request failed.");
+                    }
+                    if (!data.response) {
+                        throw new Error("The assistant returned an empty response.");
+                    }
+
+                    setToast(data.response);
+                    speakReply(data.response);
+                } catch (error) {
+                    console.error("Kisan Setu voice assistant error:", error);
+                    setToast(error.message || "Could not connect to Kisan Setu. Please try again.");
+                }
+            };
+
+            recognition.onerror = (event) => {
+                console.error("Speech recognition error:", event.error);
+                setToast(event.error === "not-allowed"
+                    ? "Microphone permission was denied. Allow microphone access and try again."
+                    : "Could not hear you. Please try again.");
+            };
+
+            recognition.onend = () => {
+                voiceRecognitionActive = false;
+            };
+
+            try {
+                recognition.start();
+            } catch (error) {
+                voiceRecognitionActive = false;
+                console.error("Could not start speech recognition:", error);
+                setToast("Could not start the microphone. Please try again.");
+            }
+        }
+
+        // Register each microphone button exactly once.
+        document.getElementById("voiceCommandBtn")?.addEventListener("click", startVoiceAssistant);
+        document.getElementById("floatingMic")?.addEventListener("click", startVoiceAssistant);
+
+        document.getElementById('heroStart').addEventListener('click', openProfileModal);
+        document.getElementById('profileTrigger').addEventListener('click', openProfileModal);
+        document.getElementById('openProfileModalBtn').addEventListener('click', openProfileModal);
+        document.getElementById('closeProfileModal').addEventListener('click', closeProfileModal);
+        document.getElementById('cancelProfileModal').addEventListener('click', closeProfileModal);
+        document.getElementById('heroShiksha').addEventListener('click', () => document.getElementById('kisan-shiksha').scrollIntoView({ behavior: 'smooth' }));
+        document.getElementById('weatherAdviceBtn').addEventListener('click', () => setToast(wxAdvice()));
+        document.getElementById('marketCompareBtn').addEventListener('click', () => setToast('Comparison across nearby mandis is ready.'));
+        document.getElementById('analyzeCropBtn').addEventListener('click', analyzeCrop);
+        document.getElementById('farmerProfileForm').addEventListener('submit', handleProfileSubmit);
+        document.getElementById('langToggle').addEventListener('click', () => {
+            currentLang = currentLang === 'hi' ? 'en' : 'hi';
+            applyLanguage(currentLang);
+        });
+
+        document.querySelectorAll('.bottom-nav a').forEach((navLink) => {
+            navLink.addEventListener('click', () => {
+                document.querySelectorAll('.bottom-nav a').forEach((item) => item.classList.remove('active'));
+                navLink.classList.add('active');
+            });
+        });
+
+        // Text chat uses the same backend endpoint and payload as voice queries.
+        function updateAiProfileCard() {
+            const name = document.getElementById('name')?.value?.trim() || farmerProfile?.name || 'Farmer';
+            const district = document.getElementById('district')?.value?.trim() || farmerProfile?.district || '';
+            const state = document.getElementById('state')?.value?.trim() || farmerProfile?.state || '';
+            const crops = document.getElementById('crops')?.value?.trim() || farmerProfile?.crops || 'Not set';
+            const location = [district, state].filter(Boolean).join(', ') || 'Location not set';
+            document.getElementById('aiProfileName').textContent = name;
+            document.getElementById('aiProfileLocation').textContent = location;
+            document.getElementById('aiProfileCrop').textContent = crops;
+        }
+
+        const aiQuestionForm = document.getElementById('aiQuestionForm');
+        aiQuestionForm?.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const questionInput = document.getElementById('aiQuestion');
+            const sendButton = document.getElementById('aiSendBtn');
+            const responseBox = document.getElementById('aiResponse');
+            const question = questionInput.value.trim();
+            if (!question) return;
+
+            const userMessage = document.createElement('div');
+            userMessage.className = 'assistant-message user-message';
+            const userContent = document.createElement('div');
+            const userLabel = document.createElement('strong');
+            userLabel.textContent = 'You';
+            const userText = document.createElement('p');
+            userText.textContent = question;
+            userContent.append(userLabel, userText);
+            userMessage.append(userContent);
+            responseBox.append(userMessage);
+
+            const loading = document.createElement('div');
+            loading.className = 'assistant-message';
+            loading.id = 'aiLoadingMessage';
+            loading.innerHTML = '<span class="message-avatar">🌱</span><div><strong>Kisan Setu</strong><p>Working on it…</p></div>';
+            responseBox.append(loading);
+            responseBox.scrollTop = responseBox.scrollHeight;
+            sendButton.disabled = true;
+            questionInput.disabled = true;
+
+            try {
+                const response = await fetch('/api/voice', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text: question, language: currentLang, farmer: farmerProfile })
+                });
+                const data = await response.json().catch(() => ({}));
+                if (!response.ok) throw new Error(data.detail || data.error || 'The assistant request failed.');
+                if (!data.response) throw new Error('The assistant returned an empty response.');
+                loading.querySelector('p').textContent = data.response;
+                if ('speechSynthesis' in window && 'SpeechSynthesisUtterance' in window) {
+                    const speech = new SpeechSynthesisUtterance(data.response);
+                    speech.lang = currentLang === 'hi' ? 'hi-IN' : (currentLang === 'mr' ? 'mr-IN' : (currentLang === 'ta' ? 'ta-IN' : 'en-IN'));
+                    // Text answers are shown on screen; users can use the voice assistant for spoken replies.
+                }
+            } catch (error) {
+                loading.querySelector('p').textContent = error.message || 'Could not connect to Kisan Setu. Please try again.';
+            } finally {
+                sendButton.disabled = false;
+                questionInput.disabled = false;
+                questionInput.value = '';
+                questionInput.focus();
+                responseBox.scrollTop = responseBox.scrollHeight;
+            }
+        });
+
+        document.querySelectorAll('.prompt-chip').forEach((button) => {
+            button.addEventListener('click', () => {
+                document.getElementById('aiQuestion').value = button.dataset.prompt || '';
+                document.getElementById('aiQuestion').focus();
+            });
+        });
+        document.getElementById('aiUpdateProfile')?.addEventListener('click', openProfileModal);
+
+        // Personalize external map searches using the saved farmer location.
+        function updateResourceMapLinks() {
+            const district = document.getElementById('district')?.value?.trim() || farmerProfile?.district || '';
+            const state = document.getElementById('state')?.value?.trim() || farmerProfile?.state || '';
+            const location = [district, state, 'India'].filter(Boolean).join(', ');
+            document.querySelectorAll('.resource-map').forEach((link) => {
+                const query = `${link.dataset.query || 'agricultural resources'} ${location}`.trim();
+                link.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+            });
+        }
+
+        updateResourceMapLinks();
+        updateAiProfileCard();
+        updateProfileSummary();
+        renderCropMenu();
+        renderCropLesson();
+
+        // Jarvis-style spoken reply: calm, slightly lower voice; British-English male voice when one is installed.
+        function speakReply(text) {
+            if (!('speechSynthesis' in window) || !('SpeechSynthesisUtterance' in window)) return;
+            const synth = window.speechSynthesis;
+            synth.cancel();
+            const utter = new SpeechSynthesisUtterance(text);
+            utter.lang = { en: 'en-GB', hi: 'hi-IN', mr: 'mr-IN', ta: 'ta-IN' }[currentLang] || 'hi-IN';
+            const voices = synth.getVoices();
+            const base = utter.lang.split('-')[0].toLowerCase();
+            const sameLang = voices.filter((v) => v.lang.toLowerCase().startsWith(base));
+            const male = /male|george|ryan|daniel|arthur|james|rishi|hemant|prabhat/i;
+            const voice = (currentLang === 'en' && voices.find((v) => v.lang === 'en-GB' && male.test(v.name)))
+                || sameLang.find((v) => male.test(v.name)) || sameLang[0];
+            if (voice) utter.voice = voice;
+            utter.rate = 0.95;
+            utter.pitch = 0.8;
+            synth.speak(utter);
+        }
+
+        // ---- Live time + weather for the visitor's current location ----
+        const WX_CODES = {
+            0: ['☀️', 'Clear sky', 'साफ आसमान'], 1: ['🌤️', 'Mostly clear', 'ज्यादातर साफ'], 2: ['⛅', 'Partly cloudy', 'आंशिक बादल'],
+            3: ['☁️', 'Overcast', 'बादल छाए'], 45: ['🌫️', 'Fog', 'कोहरा'], 48: ['🌫️', 'Fog', 'कोहरा'],
+            51: ['🌦️', 'Light drizzle', 'हल्की फुहार'], 53: ['🌦️', 'Drizzle', 'फुहार'], 55: ['🌧️', 'Heavy drizzle', 'तेज फुहार'],
+            61: ['🌧️', 'Light rain', 'हल्की बारिश'], 63: ['🌧️', 'Rain', 'बारिश'], 65: ['🌧️', 'Heavy rain', 'तेज बारिश'],
+            80: ['🌦️', 'Rain showers', 'बौछारें'], 81: ['🌧️', 'Rain showers', 'बौछारें'], 82: ['⛈️', 'Violent showers', 'तेज बौछारें'],
+            95: ['⛈️', 'Thunderstorm', 'आंधी-तूफान'], 96: ['⛈️', 'Thunderstorm with hail', 'ओलों के साथ आंधी'], 99: ['⛈️', 'Thunderstorm with hail', 'ओलों के साथ आंधी']
+        };
+        function wxInfo(code) {
+            if (WX_CODES[code]) return WX_CODES[code];
+            if (code === 56 || code === 57) return WX_CODES[53];
+            if (code === 66 || code === 67) return WX_CODES[63];
+            if ((code >= 71 && code <= 77) || code === 85 || code === 86) return ['❄️', 'Snow', 'बर्फबारी'];
+            return ['🌡️', 'Unknown', 'अज्ञात'];
+        }
+        const wxEl = (id) => document.getElementById(id);
+        const wxIsHi = () => currentLang === 'hi';
+        const wxLocale = () => (wxIsHi() ? 'hi-IN' : 'en-IN');
+        let wxState = null; // last loaded weather
+        let wxNote = '';
+
+        function tickClock() {
+            const opts = wxState && wxState.timezone ? { timeZone: wxState.timezone } : {};
+            const now = new Date();
+            wxEl('liveTime').textContent = now.toLocaleTimeString(wxLocale(), { hour: '2-digit', minute: '2-digit', second: '2-digit', ...opts });
+            wxEl('liveDate').textContent = now.toLocaleDateString(wxLocale(), { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', ...opts });
+        }
+
+        async function wxReverseGeocode(lat, lon) {
+            try {
+                const r = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=${wxIsHi() ? 'hi' : 'en'}`);
+                if (!r.ok) throw new Error('geocode');
+                const d = await r.json();
+                const name = [d.city || d.locality, d.principalSubdivision].filter(Boolean).join(', ');
+                if (name) return name;
+            } catch (e) { /* fall back to coordinates */ }
+            return `${Math.abs(lat).toFixed(2)}°${lat >= 0 ? 'N' : 'S'}, ${Math.abs(lon).toFixed(2)}°${lon >= 0 ? 'E' : 'W'}`;
+        }
+
+        async function loadLiveWeather(lat, lon, placeOverride, note) {
+            wxNote = note || '';
+            const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto&forecast_days=6`;
+            try {
+                const [res, place] = await Promise.all([fetch(url), placeOverride || wxReverseGeocode(lat, lon)]);
+                if (!res.ok) throw new Error('weather');
+                wxState = { ...(await res.json()), place, lat, lon };
+                renderLiveWeather();
+                tickClock();
+            } catch (e) {
+                wxEl('liveCond').textContent = wxIsHi() ? 'मौसम अभी उपलब्ध नहीं है। इंटरनेट जांचें।' : 'Weather is unavailable right now. Check your connection.';
+                wxEl('liveRetry').hidden = false;
+            }
+        }
+
+        function renderLiveWeather() {
+            if (!wxState) return;
+            const c = wxState.current, d = wxState.daily, info = wxInfo(c.weather_code);
+            const cond = wxIsHi() ? info[2] : info[1];
+            const temp = Math.round(c.temperature_2m) + '°C';
+            const hum = c.relative_humidity_2m + '%';
+            const rain = (d.precipitation_probability_max[0] ?? 0) + '%';
+            const wind = Math.round(c.wind_speed_10m) + ' km/h';
+            const set = (id, text) => { wxEl(id).textContent = text; };
+            set('livePlace', '📍 ' + wxState.place); set('liveIcon', info[0]); set('liveTemp', temp); set('liveCond', cond);
+            set('liveHum', hum); set('liveRain', rain); set('liveWind', wind); set('liveNote', wxNote);
+            set('wxPlace', wxState.place); set('wxIcon', info[0]); set('wxTemp', temp); set('wxCond', cond);
+            set('wxHumidity', hum); set('wxRain', rain); set('wxWind', wind);
+            const dayName = (i) => (i === 0 ? (wxIsHi() ? 'आज' : 'Today') : new Date(d.time[i] + 'T12:00:00').toLocaleDateString(wxLocale(), { weekday: 'short' }));
+            wxEl('wxForecast').innerHTML = d.time.map((_, i) => {
+                const fi = wxInfo(d.weather_code[i]);
+                const chance = d.precipitation_probability_max[i] ?? 0;
+                return `<div class="forecast-item"><div class="forecast-date">${dayName(i)}</div><div class="forecast-icon">${fi[0]}</div><div><div style="font-weight:700; color: var(--green-900);">${Math.round(d.temperature_2m_max[i])}° / ${Math.round(d.temperature_2m_min[i])}°C</div><div class="forecast-text">${wxIsHi() ? fi[2] : fi[1]} · ${chance}% ${wxIsHi() ? 'बारिश' : 'rain'}</div></div></div>`;
+            }).join('');
+            const rainDay = d.time.findIndex((_, i) => i > 0 && (d.precipitation_probability_max[i] ?? 0) >= 50);
+            wxEl('wxAlert').textContent = rainDay > 0
+                ? (wxIsHi() ? `🌧️ ${dayName(rainDay)} को बारिश की संभावना` : `🌧️ Rain likely on ${dayName(rainDay)}`)
+                : (wxIsHi() ? '☀️ अगले 5 दिनों में बारिश की संभावना 50% से कम' : '☀️ Rain chance stays below 50% for the next 5 days');
+        }
+
+        function wxAdvice() {
+            if (!wxState) return wxIsHi() ? 'मौसम का डेटा अभी लोड हो रहा है।' : 'Weather is still loading.';
+            const d = wxState.daily;
+            const soon = [0, 1, 2].some((i) => (d.precipitation_probability_max[i] ?? 0) >= 50);
+            if (soon) return wxIsHi() ? 'अगले 2 दिनों में बारिश की संभावना है; सिंचाई से पहले खेत की नमी जांचें।' : 'Rain is likely in the next 2 days; check field moisture before irrigating.';
+            return wxIsHi() ? 'बारिश की संभावना कम है; सिंचाई तय करने से पहले खेत की नमी और फसल की अवस्था जांचें।' : 'Rain chance is low; check field moisture and crop stage before deciding on irrigation.';
+        }
+
+        async function useFallbackLocation(reason) {
+            // If location is blocked or unavailable, show the saved district (or Meerut) so the card still has real data.
+            const name = (farmerProfile && farmerProfile.district) || 'Meerut';
+            try {
+                const g = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(name)}&count=1&language=en&format=json`);
+                const p = ((await g.json()).results || [])[0];
+                if (!p) throw new Error('no place');
+                const why = reason === 'denied' ? 'location access is blocked' : 'your location is unavailable';
+                await loadLiveWeather(p.latitude, p.longitude, [p.name, p.admin1].filter(Boolean).join(', '), wxIsHi() ? `लोकेशन नहीं मिली, इसलिए ${p.name} का मौसम दिखाया जा रहा है।` : `Showing ${p.name} because ${why}.`);
+            } catch (e) {
+                wxEl('liveCond').textContent = wxIsHi() ? 'मौसम अभी उपलब्ध नहीं है।' : 'Weather is unavailable right now.';
+            }
+            wxEl('liveRetry').hidden = false;
+        }
+
+        function startLocating() {
+            wxEl('liveRetry').hidden = true;
+            wxEl('livePlace').textContent = wxIsHi() ? '📍 आपकी लोकेशन खोज रहे हैं…' : '📍 Finding your location…';
+            if (!navigator.geolocation) { useFallbackLocation('unavailable'); return; }
+            navigator.geolocation.getCurrentPosition(
+                (pos) => loadLiveWeather(pos.coords.latitude, pos.coords.longitude, null, ''),
+                (err) => useFallbackLocation(err && err.code === 1 ? 'denied' : 'unavailable'),
+                { timeout: 10000, maximumAge: 600000 }
+            );
+        }
+
+        wxEl('liveRetry').addEventListener('click', startLocating);
+        wxEl('langToggle')?.addEventListener('click', () => { tickClock(); renderLiveWeather(); });
+        setInterval(tickClock, 1000);
+        setInterval(() => { if (wxState) loadLiveWeather(wxState.lat, wxState.lon, wxState.place, wxNote); }, 15 * 60 * 1000);
+        tickClock();
+        startLocating();
+
+        applyLanguage(currentLang);
+    </script>
+</body>
+
+</html>
